@@ -4,7 +4,9 @@ import Head from "next/head";
 
 export async function getServerSideProps(context) {
   const data = await fetch(
-    "https://knoxschools.instructure.com/api/v1/courses/" +
+    "https://" +
+      process.env.BASE_DOMAIN +
+      "/api/v1/courses/" +
       context.query.className +
       "/assignments/" +
       context.query.assignmentName +

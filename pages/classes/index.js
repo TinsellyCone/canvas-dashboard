@@ -6,7 +6,9 @@ import { IconCheck } from "@tabler/icons-react";
 
 export async function getServerSideProps() {
   const data = await fetch(
-    "https://knoxschools.instructure.com/api/v1/courses.json?access_token=" +
+    "https://" +
+      process.env.BASE_DOMAIN +
+      "/api/v1/courses.json?access_token=" +
       process.env.API_KEY +
       "&enrollment_state=active&per_page=15&include[]=course_image"
   ).then((response) => response.json());

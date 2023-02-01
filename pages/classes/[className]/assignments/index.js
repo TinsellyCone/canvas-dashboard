@@ -4,27 +4,50 @@ import Head from "next/head";
 import Link from "next/link";
 
 export async function getServerSideProps(context) {
-  const futureData = await fetch(
-    "https://knoxschools.instructure.com/api/v1/courses/" +
+  let futureData = await fetch(
+    "https://" +
+      process.env.BASE_DOMAIN +
+      "/api/v1/courses/" +
       context.query.className +
       "/assignments.json?access_token=" +
       process.env.API_KEY +
       "&per_page=10&order_by=due_at&bucket=future"
   ).then((response) => response.json());
-  const pastData = await fetch(
-    "https://knoxschools.instructure.com/api/v1/courses/" +
+  let pastData = await fetch(
+    "https://" +
+      process.env.BASE_DOMAIN +
+      "/api/v1/courses/" +
       context.query.className +
       "/assignments.json?access_token=" +
       process.env.API_KEY +
       "&per_page=10&order_by=due_at&bucket=past"
   ).then((response) => response.json());
-  const undatedData = await fetch(
+  let undatedData = await fetch(
     "https://knoxschools.instructure.com/api/v1/courses/" +
       context.query.className +
       "/assignments.json?access_token=" +
       process.env.API_KEY +
       "&per_page=10&order_by=due_at&bucket=undated"
   ).then((response) => response.json());
+
+  futureData = futureData.map((data) => {
+    return {
+      id: data.id,
+      name: data.name,
+    };
+  });
+  pastData = pastData.map((data) => {
+    return {
+      id: data.id,
+      name: data.name,
+    };
+  });
+  undatedData = undatedData.map((data) => {
+    return {
+      id: data.id,
+      name: data.name,
+    };
+  });
 
   return {
     props: {
