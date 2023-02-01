@@ -1,5 +1,4 @@
-import { Button, Accordion, Table, Anchor } from "@mantine/core";
-import { data } from "autoprefixer";
+import { Accordion, Table, Anchor } from "@mantine/core";
 import Layout from "components/Layout";
 import Head from "next/head";
 import Link from "next/link";
@@ -12,7 +11,7 @@ export async function getServerSideProps(context) {
       context.query.className +
       "/assignments.json?access_token=" +
       process.env.API_KEY +
-      "&per_page=10&order_by=due_at&bucket=future"
+      "&per_page=40&bucket=upcoming"
   ).then((response) => response.json());
   let pastData = await fetch(
     "https://" +
@@ -21,14 +20,14 @@ export async function getServerSideProps(context) {
       context.query.className +
       "/assignments.json?access_token=" +
       process.env.API_KEY +
-      "&per_page=10&order_by=due_at&bucket=past"
+      "&per_page=40&order_by=due_at&bucket=past"
   ).then((response) => response.json());
   let undatedData = await fetch(
     "https://knoxschools.instructure.com/api/v1/courses/" +
       context.query.className +
       "/assignments.json?access_token=" +
       process.env.API_KEY +
-      "&per_page=10&order_by=due_at&bucket=undated"
+      "&per_page=40&order_by=due_at&bucket=undated"
   ).then((response) => response.json());
 
   futureData = futureData.map((data) => {
@@ -83,7 +82,7 @@ export default function classDetails({
             <Accordion.Panel>
               <Table verticalSpacing={"sm"}>
                 <tbody>
-                  {pastAssignments.map((currentAssignment) => {
+                  {futureAssignments.map((currentAssignment) => {
                     return (
                       <tr key={currentAssignment.name}>
                         <td>
