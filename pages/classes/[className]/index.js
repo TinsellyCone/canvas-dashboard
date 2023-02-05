@@ -4,6 +4,10 @@ import Head from "next/head";
 import Link from "next/link";
 
 export async function getServerSideProps(context) {
+  console.timeEnd("fetch-future");
+  console.timeEnd("fetch-past");
+  console.timeEnd("fetch-undated");
+  console.time("fetch-future");
   let futureData = await fetch(
     "https://" +
       process.env.BASE_DOMAIN +
@@ -13,6 +17,8 @@ export async function getServerSideProps(context) {
       process.env.API_KEY +
       "&per_page=40&bucket=upcoming"
   ).then((response) => response.json());
+  console.timeEnd("fetch-future");
+  console.time("fetch-past");
   let pastData = await fetch(
     "https://" +
       process.env.BASE_DOMAIN +
@@ -22,13 +28,20 @@ export async function getServerSideProps(context) {
       process.env.API_KEY +
       "&per_page=40&order_by=due_at&bucket=past"
   ).then((response) => response.json());
+  console.timeEnd("fetch-past");
+  console.time("fetch-undated");
   let undatedData = await fetch(
-    "https://knoxschools.instructure.com/api/v1/courses/" +
+    "https://" +
+      process.env.BASE_DOMAIN +
+      "/api/v1/courses/" +
       context.query.className +
       "/assignments.json?access_token=" +
       process.env.API_KEY +
       "&per_page=40&order_by=due_at&bucket=undated"
   ).then((response) => response.json());
+
+  console.timeEnd("fetch-undated");
+  console.time("fetch-processing")
 
   futureData = futureData.map((data) => {
     return {
@@ -48,6 +61,8 @@ export async function getServerSideProps(context) {
       name: data.name,
     };
   });
+
+  console.timeEnd("fetch-processing")
 
   return {
     props: {

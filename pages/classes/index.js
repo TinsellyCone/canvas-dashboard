@@ -44,9 +44,11 @@ export default function classDetails({ classes }) {
       </Head>
       <div
         style={{
-          display: "flex",
-          flexShrink: "none",
-          flexWrap: "wrap",
+          display: "grid",
+          // flexShrink: "none",
+          // flexWrap: "wrap",
+          gridTemplateColumns: "repeat( auto-fit, minmax(300px, 300px))",
+          justifyContent: 'start',
           gap: 15,
         }}
       >
@@ -57,6 +59,7 @@ export default function classDetails({ classes }) {
               grade={95}
               imagePath={currentClass.image_download_url}
               id={currentClass.id}
+              active
             />
           );
         })}

@@ -17,9 +17,9 @@ export default function Layout({ children, options, title }) {
         withGlobalStyles
         withNormalizeCSS
       >
-        <Flex direction="row">
+        <Flex direction="row" style={{maxWidth: "100vw"}}>
           <Navbar colorScheme={colorTheme} />
-          <div style={{ width: "100%" }}>
+          <div style={{ width:'100%', overflow:'hidden' }}>
             <Titlebar
               options={options}
               title={title}
