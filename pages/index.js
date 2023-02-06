@@ -1,12 +1,14 @@
-import Layout from "components/Layout";
 import Head from "next/head";
+import Layout from "components/Layout";
 import ClassCard from "components/ClassCard";
 import { Menu } from "@mantine/core";
 import { IconCheck } from "@tabler/icons-react";
 
 export async function getServerSideProps() {
   const data = await fetch(
-    "https://" + process.env.BASE_DOMAIN + "/api/v1/courses.json?access_token=" +
+    "https://" +
+      process.env.BASE_DOMAIN +
+      "/api/v1/courses.json?access_token=" +
       process.env.API_KEY +
       "&enrollment_state=active&per_page=15&include[]=course_image"
   ).then((response) => response.json());
@@ -42,9 +44,9 @@ export default function classDetails({ classes }) {
       </Head>
       <div
         style={{
-          display: "flex",
-          flexShrink: "none",
-          flexWrap: "wrap",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 300px))",
+          justifyContent: "start",
           gap: 15,
         }}
       >
@@ -55,6 +57,7 @@ export default function classDetails({ classes }) {
               grade={95}
               imagePath={currentClass.image_download_url}
               id={currentClass.id}
+              active
             />
           );
         })}

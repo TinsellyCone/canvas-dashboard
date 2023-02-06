@@ -45,9 +45,7 @@ export default function classDetails({ classes }) {
       <div
         style={{
           display: "grid",
-          // flexShrink: "none",
-          // flexWrap: "wrap",
-          gridTemplateColumns: "repeat( auto-fit, minmax(300px, 300px))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 300px))",
           justifyContent: 'start',
           gap: 15,
         }}
