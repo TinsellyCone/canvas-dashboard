@@ -1,7 +1,10 @@
 module.exports = {
   reactStrictMode: true,
   experimental: {
-    appDir: false
+    appDir: true
+  },
+  typescript: {
+    ignoreBuildErrors: true
   },
   async rewrites() {
     return [

@@ -36,6 +36,7 @@ export default function Dashboard() {
               imagePath={currentClass.image_download_url}
               id={currentClass.id}
               active
+              key={currentClass.id}
             />
           )
         })

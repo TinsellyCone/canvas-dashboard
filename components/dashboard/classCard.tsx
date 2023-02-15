@@ -21,6 +21,7 @@ function ActiveBadge(props) {
   if (props.active) {
     return <Badge color={'green'}>Active</Badge>
   }
+  else return(<></>)
 }
 
 export default function ClassCard(props) {
@@ -33,7 +34,7 @@ export default function ClassCard(props) {
         <Image src={props.imagePath} height={175} withPlaceholder></Image>
       </Card.Section>
       <Group position='apart' mt={'md'} mb={'xs'}>
-        <Stack justify={'center'} spacing={'none'}>
+        <Stack justify={'center'} spacing={0}>
           <Text size={'lg'} weight={600} m={0} lineClamp={1} maw={170}>
             {props.className}
           </Text>

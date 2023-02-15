@@ -21,7 +21,7 @@ export default function Module({courseID, moduleID}) {
           <tbody>
             {!isLoading && data != null
               ? data.map((item) => {
-                  return <tr><td>{item.title}</td></tr>;
+                  return <tr key={item.title}><td>{item.title}</td></tr>;
                 })
               : null}
           </tbody>
