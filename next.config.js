@@ -1,7 +1,7 @@
 module.exports = {
   reactStrictMode: true,
   experimental: {
-    appDir: true
+    appDir: false
   },
   async rewrites() {
     return [
