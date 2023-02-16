@@ -7,7 +7,8 @@ import {
   Divider,
   Button,
   Code,
-  Group
+  Group,
+  Stack
 } from "@mantine/core";
 import { useState } from "react";
 import InputMask from "react-input-mask";
@@ -49,18 +50,30 @@ export default function OnBoarding() {
           description="Find your Canvas account"
           allowStepSelect={shouldAllowSelectStep(0)}
         >
-          <Flex justify={"center"} align={"center"} w={"100%"} h={"100%"}>
-            <Input.Wrapper
+          <Flex
+            direction={"column"}
+            justify={"center"}
+            align={"center"}
+            w={"100%"}
+            h={"100%"}
+            mt={20}
+            gap={25}
+          >
+            <TextInput
+              placeholder="Token"
+              onChange={(event) => setToken(event.target.value)}
+              value={token}
               w={350}
               description="Generated in Canvas account settings"
               label="Canvas Access Token"
+            />
+            <Button
+              variant="light"
+              onClick={() => handleStepChange(active + 1)}
+              w={350}
             >
-              <Input
-                placeholder="Token"
-                onChange={(event) => setToken(event.target.value)}
-                value={token}
-              />
-            </Input.Wrapper>
+              Contine
+            </Button>
           </Flex>
         </Stepper.Step>
         <Stepper.Step label="Profile" description="Nice to meet you">
@@ -94,7 +107,7 @@ export default function OnBoarding() {
               description="Keep it short and sweet"
               label="Description"
             />
-            {/* <Input.Wrapper
+            <Input.Wrapper
               w={350}
               description="By default, this won't be displayed"
               label="Phone Number"
@@ -106,21 +119,25 @@ export default function OnBoarding() {
                 placeholder="+1 (123) 456-7890"
                 value={phoneNumber}
               />
-            </Input.Wrapper> */}
-            <TextInput
+            </Input.Wrapper>
+            {/* <TextInput
               onChange={(event) => setNumber(event.target.value)}
               placeholder="+1 (123) 456-7890"
               value={phoneNumber}
               w={350}
               description="By default, this won't be displayed"
               label="Phone Number"
-            />
+            /> */}
+            <Button
+              variant="light"
+              onClick={() => handleStepChange(active + 1)}
+              w={350}
+            >
+              Contine
+            </Button>
           </Flex>
         </Stepper.Step>
         <Stepper.Step label="Preferences" description="Customize everything">
-          <Button onClick={() => handleStepChange(active + 1)}>Contine</Button>
-        </Stepper.Step>
-        <Stepper.Completed>
           <Flex
             direction={"column"}
             justify={"center"}
@@ -130,13 +147,53 @@ export default function OnBoarding() {
             mt={20}
             gap={25}
           >
-            <Text fz={35} fw={700}>Summary</Text>
+            <Button
+              variant="light"
+              onClick={() => handleStepChange(active + 1)}
+              w={350}
+            >
+              Contine
+            </Button>
+          </Flex>
+        </Stepper.Step>
+        <Stepper.Completed>
+          <Flex
+            direction={"column"}
+            justify={"center"}
+            align={"center"}
+            w={"100%"}
+            h={"100%"}
+            mt={20}
+            gap={20}
+          >
+            <Text fz={35} fw={700}>
+              Summary
+            </Text>
             <Divider w={350} />
-            
-
-            <Group maw={350}><Text>Token: </Text><Code>{token.slice(0,35)}{token.length > 35 ? "..." : null}</Code></Group>
-            <AvatarCard name={name} description={description} avatarURL={avatarURL} />
-
+            <AvatarCard
+              name={name}
+              description={description}
+              avatarURL={avatarURL}
+            />
+            <Stack spacing={3} w={350}>
+              <Group spacing={0}>
+                <Text fw={700}>Phone Number: &nbsp;</Text>
+                <Text>{phoneNumber}</Text>
+              </Group>
+              <Group spacing={0}>
+                <Text fw={700}>Token: &nbsp;</Text>
+                <Code>
+                  {token.slice(0, 35)}
+                  {token.length > 35 ? "..." : null}
+                </Code>
+              </Group>
+            </Stack>
+            <Button
+              variant="light"
+              w={350}
+            >
+              Looks good!
+            </Button>
           </Flex>
         </Stepper.Completed>
       </Stepper>
