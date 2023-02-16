@@ -23,9 +23,10 @@ export default function Module({courseID, moduleID}) {
               ? data.map((item) => {
                   return <tr key={item.title}><td>{item.title}</td></tr>;
                 })
-              : null}
+              : <></>}
           </tbody>
         </Table>
       </>
     );
+    else return <></>
 }

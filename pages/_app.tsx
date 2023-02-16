@@ -7,8 +7,8 @@ import type { AppProps } from 'next/app'
 import { MantineProvider, Flex } from '@mantine/core'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
-import { useSession } from '@supabase/auth-helpers-react'
 import useTheme from 'components/lib/useTheme'
+import { Analytics } from '@vercel/analytics/react'
 
 export default function App({ Component, pageProps }: AppProps) {
   const { dark_theme } = useTheme();
@@ -43,6 +43,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Navbar />
           <div style={{ width: '100%', overflow: 'hidden' }}>
             <Component {...pageProps} setColorScheme={setColorTheme} />
+            <Analytics />
           </div>
         </Flex>
       </MantineProvider>
