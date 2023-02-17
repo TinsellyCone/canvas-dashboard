@@ -5,7 +5,7 @@ import {
 } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
 
-export default function useDB() {
+export default function useProfile(id) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -19,12 +19,12 @@ export default function useDB() {
       try {
         setLoading(true);
         if (!user) return;
+        if (id == null) id = user.id;
         const { data, error } = await supabase
           .from("profiles")
           .select()
-          .eq("id", user.id)
+          .eq("id", id)
           .single();
-        console.log(data)
         if (error) setError(error);
         if (data) {
           setData(data);
@@ -32,7 +32,7 @@ export default function useDB() {
         }
         setLoading(false);
       } catch (err) {
-        alert(err.message);
+        alert(err);
       }
     };
     fetchName();

@@ -8,7 +8,7 @@ import {
   Button,
   Code,
   Group,
-  Stack
+  Stack,
 } from "@mantine/core";
 import { useState } from "react";
 import InputMask from "react-input-mask";
@@ -17,13 +17,15 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useUser } from "@supabase/auth-helpers-react";
 
 export default function OnBoarding() {
-  const [avatar_url, setAvatar] = useState();
+  const [avatar_url, setAvatar] = useState("");
   const [full_name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [phone_number, setNumber] = useState("");
   const [token, setToken] = useState("");
   const supabase = useSupabaseClient();
   const user = useUser();
+
+  const [loading, setLoading] = useState(false)
 
   const [active, setActive] = useState(0);
   const [highestStepVisited, setHighestStepVisited] = useState(active);
@@ -74,7 +76,9 @@ export default function OnBoarding() {
             />
             <Button
               variant="light"
-              onClick={() => {if(token != "") handleStepChange(active + 1)}}
+              onClick={() => {
+                if (token != "") handleStepChange(active + 1);
+              }}
               fullWidth
             >
               Contine
@@ -96,6 +100,7 @@ export default function OnBoarding() {
               name={full_name}
               avatarURL={avatar_url}
               description={description}
+              color={'blue'}
             />
             <TextInput
               onChange={(event) => setName(event.target.value)}
@@ -121,6 +126,7 @@ export default function OnBoarding() {
               <Input
                 component={InputMask}
                 mask="+1 (999) 999-9999"
+                maskChar="   "
                 onChange={(event) => setNumber(event.target.value)}
                 placeholder="+1 (123) 456-7890"
                 value={phone_number}
@@ -136,8 +142,10 @@ export default function OnBoarding() {
             /> */}
             <Button
               variant="light"
-              onClick={() => {if (full_name != "" && phone_number != "")
-                handleStepChange(active + 1);}}
+              onClick={() => {
+                if (full_name != "" && phone_number != "")
+                  handleStepChange(active + 1);
+              }}
               fullWidth
             >
               Contine
@@ -183,6 +191,7 @@ export default function OnBoarding() {
               name={full_name}
               description={description}
               avatarURL={avatar_url}
+              color={'blue'}
             />
             <Stack spacing={3} w={"100%"}>
               <Group spacing={0}>
@@ -197,7 +206,12 @@ export default function OnBoarding() {
                 </Code>
               </Group>
             </Stack>
-            <Button variant="light" fullWidth onClick={() => submit()}>
+            <Button
+              disabled={loading}
+              variant="light"
+              fullWidth
+              onClick={() => submit()}
+            >
               Looks good!
             </Button>
           </Flex>
@@ -206,11 +220,9 @@ export default function OnBoarding() {
     </div>
   );
   async function submit() {
-  
-    console.log(
-      "Submit: " + full_name + avatar_url + description + phone_number + token
-    );
-    
+
+    setLoading(true);
+
     for (let i = 0; user != null && i < 1; i++) {
       const { data, error } = await supabase
       .from('profiles')

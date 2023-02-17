@@ -14,51 +14,53 @@ export default function Navbar() {
   const { avatarURL } = useAvatar()
   const session = useSession();
   const supabase = useSupabaseClient()
-  const { name } = useName()
+  const { name: full_name } = useName()
 
   return (
     <div style={{ zIndex: 1000 }}>
       <Stack
-        p={'sm'}
-        style={{ outline: '1px solid dimmed' }}
+        p={"sm"}
+        style={{ outline: "1px solid dimmed" }}
         top={0}
         left={0}
-        w={'fit-content'}
-        h={'100vh'}
-        pos={'sticky'}
+        w={"fit-content"}
+        h={"100vh"}
+        pos={"sticky"}
         bg={
-          theme.colorScheme === 'dark'
+          theme.colorScheme === "dark"
             ? theme.colors.dark[8]
             : theme.colors.gray[0]
         }
-        justify={'space-between'}
+        justify={"space-between"}
       >
         <Stack>
-          <ActionIcon
-            size={'lg'}
-            variant='light'
-            component={Link}
-            href='/'
-          >
+          <ActionIcon size={"lg"} variant="light" component={Link} href="/">
             <IconDashboard size={20} />
           </ActionIcon>
         </Stack>
         <Stack>
-          <Menu position='right-end' transition={'pop-top-left'}>
+          <Menu position="right-end" transition={"pop-top-left"}>
             <Menu.Target>
               <Avatar
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: "pointer" }}
                 size={34}
-                src={
-                  session
-                    ? avatarURL
-                    : null
-                }
-                radius={'xl'}
-              />
+                src={avatarURL}
+                radius={"xl"}
+                color={'blue'}
+              >
+                {full_name != null ? full_name.split(" ")[0].charAt(0).toUpperCase() +
+                  (full_name.split(" ").length >= 2
+                    ? full_name.split(" ")[full_name.split(" ").length - 1].charAt(0)
+                    : "") : ''}
+              </Avatar>
             </Menu.Target>
             <Menu.Dropdown>
-              {name != null ? <><Menu.Label>Hi, {name.split(" ")[0]}!</Menu.Label><Menu.Divider /></> : null}
+              {full_name != null ? (
+                <>
+                  <Menu.Label>Hi, {full_name.split(" ")[0]}!</Menu.Label>
+                  <Menu.Divider />
+                </>
+              ) : null}
               <Menu.Item icon={<IconUser size={14} />}>Profile</Menu.Item>
               <Menu.Item
                 icon={<IconSettings size={14} />}
@@ -70,9 +72,9 @@ export default function Navbar() {
               {session ? (
                 <Menu.Item
                   onClick={() => {
-                    supabase.auth.signOut()
+                    supabase.auth.signOut();
                   }}
-                  color={'red'}
+                  color={"red"}
                   icon={<IconLogout size={14} />}
                 >
                   Sign Out
@@ -87,5 +89,5 @@ export default function Navbar() {
         isSettingsOpen={isSettingsOpen}
       />
     </div>
-  )
+  );
 }
