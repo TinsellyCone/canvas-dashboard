@@ -74,7 +74,7 @@ export default function OnBoarding() {
             />
             <Button
               variant="light"
-              onClick={() => handleStepChange(active + 1)}
+              onClick={() => {if(token != "") handleStepChange(active + 1)}}
               fullWidth
             >
               Contine
@@ -136,7 +136,8 @@ export default function OnBoarding() {
             /> */}
             <Button
               variant="light"
-              onClick={() => handleStepChange(active + 1)}
+              onClick={() => {if (full_name != "" && phone_number != "")
+                handleStepChange(active + 1);}}
               fullWidth
             >
               Contine
