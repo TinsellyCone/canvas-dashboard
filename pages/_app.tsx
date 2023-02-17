@@ -2,7 +2,6 @@ import Head from 'next/head'
 import '@/styles/globals.css'
 import { useEffect, useState } from 'react'
 import Navbar from 'components/navbar'
-import LogIn from '@/components/logIn'
 import type { AppProps } from 'next/app'
 import { MantineProvider, Flex } from '@mantine/core'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
@@ -14,8 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const { dark_theme } = useTheme();
   const [colorTheme, setColorTheme] = useState('dark')
   const [supabase] = useState(() => createBrowserSupabaseClient())
-  useEffect(() => {if (dark_theme != null) {setColorTheme(dark_theme == true ? "dark" : "light")}});
-  console.log(dark_theme)
+  // useEffect(() => {if (dark_theme != null) {setColorTheme(dark_theme == true ? "dark" : "light")}});
 
   return (
     <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>

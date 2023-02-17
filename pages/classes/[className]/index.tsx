@@ -8,8 +8,6 @@ import { useSession } from '@supabase/auth-helpers-react'
 export default function Index({ setColorScheme }) {
   const router = useRouter()
 
-  // console.log(router.query.className)
-
   const session = useSession()
   if(!session) {
     return(<LogIn />)

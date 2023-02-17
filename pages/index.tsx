@@ -35,7 +35,7 @@ export default function Index({ setColorScheme }) {
   if(!session) {
     return(<LogIn />)
   }
-  else if (!loading && db.is_setup != true) {
+  else if (!loading && db && db.is_setup != true) {
     return (<OnBoarding />)
   }
 
