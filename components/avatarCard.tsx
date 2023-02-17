@@ -1,7 +1,7 @@
 import { Card, Group, Avatar, Stack, Text } from '@mantine/core';
 export default function AvatarCard({ avatarURL, name, description }) {
   return (
-    <Card withBorder radius={"sm"} shadow={"sm"} w={350}>
+    <Card withBorder radius={"sm"} shadow={"sm"} maw={350} w={'100%'} h={80.5}>
       <Group>
         <Avatar radius={"xl"} src={avatarURL} />
         <Stack spacing={0}>

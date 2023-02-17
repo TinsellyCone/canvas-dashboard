@@ -4,6 +4,8 @@ import { IconCheck } from '@tabler/icons'
 import Titlebar from 'components/titlebar'
 import Dashboard from 'components/dashboard/index'
 import { useSession } from '@supabase/auth-helpers-react'
+import useDB from 'components/lib/useDB'
+import OnBoarding from 'components/onboarding'
 
 
 export default function Index({ setColorScheme }) {
@@ -29,8 +31,12 @@ export default function Index({ setColorScheme }) {
   )
 
   const session = useSession()
+  const { db, loading } = useDB()
   if(!session) {
     return(<LogIn />)
+  }
+  else if (!loading && db.is_setup != true) {
+    return (<OnBoarding />)
   }
 
   return (

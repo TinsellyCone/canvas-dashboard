@@ -13,13 +13,17 @@ import {
 import { useState } from "react";
 import InputMask from "react-input-mask";
 import AvatarCard from 'components/avatarCard'
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useUser } from "@supabase/auth-helpers-react";
 
 export default function OnBoarding() {
-  const [avatarURL, setAvatarURL] = useState();
-  const [name, setName] = useState("");
+  const [avatar_url, setAvatar] = useState();
+  const [full_name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [phoneNumber, setNumber] = useState("");
+  const [phone_number, setNumber] = useState("");
   const [token, setToken] = useState("");
+  const supabase = useSupabaseClient();
+  const user = useUser();
 
   const [active, setActive] = useState(0);
   const [highestStepVisited, setHighestStepVisited] = useState(active);
@@ -55,22 +59,23 @@ export default function OnBoarding() {
             justify={"center"}
             align={"center"}
             w={"100%"}
+            maw={350}
             h={"100%"}
-            mt={20}
             gap={25}
+            style={{ margin: "0 auto", marginTop: 16 }}
           >
             <TextInput
               placeholder="Token"
               onChange={(event) => setToken(event.target.value)}
               value={token}
-              w={350}
+              w={"100%"}
               description="Generated in Canvas account settings"
               label="Canvas Access Token"
             />
             <Button
               variant="light"
               onClick={() => handleStepChange(active + 1)}
-              w={350}
+              fullWidth
             >
               Contine
             </Button>
@@ -82,20 +87,21 @@ export default function OnBoarding() {
             justify={"center"}
             align={"center"}
             w={"100%"}
+            maw={350}
             h={"100%"}
-            mt={20}
             gap={25}
+            style={{ margin: "0 auto", marginTop: 16 }}
           >
             <AvatarCard
-              name={name}
-              avatarURL={avatarURL}
+              name={full_name}
+              avatarURL={avatar_url}
               description={description}
             />
             <TextInput
               onChange={(event) => setName(event.target.value)}
               placeholder="John Doe"
-              value={name}
-              w={350}
+              value={full_name}
+              w={"100%"}
               description="Enter your full name"
               label="Name"
             />
@@ -103,12 +109,12 @@ export default function OnBoarding() {
               onChange={(event) => setDescription(event.target.value)}
               placeholder="I love school so much"
               value={description}
-              w={350}
+              w={"100%"}
               description="Keep it short and sweet"
               label="Description"
             />
             <Input.Wrapper
-              w={350}
+              w={"100%"}
               description="By default, this won't be displayed"
               label="Phone Number"
             >
@@ -117,7 +123,7 @@ export default function OnBoarding() {
                 mask="+1 (999) 999-9999"
                 onChange={(event) => setNumber(event.target.value)}
                 placeholder="+1 (123) 456-7890"
-                value={phoneNumber}
+                value={phone_number}
               />
             </Input.Wrapper>
             {/* <TextInput
@@ -131,7 +137,7 @@ export default function OnBoarding() {
             <Button
               variant="light"
               onClick={() => handleStepChange(active + 1)}
-              w={350}
+              fullWidth
             >
               Contine
             </Button>
@@ -143,14 +149,15 @@ export default function OnBoarding() {
             justify={"center"}
             align={"center"}
             w={"100%"}
+            maw={350}
             h={"100%"}
-            mt={20}
             gap={25}
+            style={{ margin: "0 auto", marginTop: 16 }}
           >
             <Button
               variant="light"
               onClick={() => handleStepChange(active + 1)}
-              w={350}
+              fullWidth
             >
               Contine
             </Button>
@@ -162,23 +169,24 @@ export default function OnBoarding() {
             justify={"center"}
             align={"center"}
             w={"100%"}
+            maw={350}
             h={"100%"}
-            mt={20}
             gap={20}
+            style={{ margin: "0 auto", marginTop: 16 }}
           >
             <Text fz={35} fw={700}>
               Summary
             </Text>
-            <Divider w={350} />
+            <Divider w={"100%"} />
             <AvatarCard
-              name={name}
+              name={full_name}
               description={description}
-              avatarURL={avatarURL}
+              avatarURL={avatar_url}
             />
-            <Stack spacing={3} w={350}>
+            <Stack spacing={3} w={"100%"}>
               <Group spacing={0}>
                 <Text fw={700}>Phone Number: &nbsp;</Text>
-                <Text>{phoneNumber}</Text>
+                <Text>{phone_number}</Text>
               </Group>
               <Group spacing={0}>
                 <Text fw={700}>Token: &nbsp;</Text>
@@ -188,10 +196,7 @@ export default function OnBoarding() {
                 </Code>
               </Group>
             </Stack>
-            <Button
-              variant="light"
-              w={350}
-            >
+            <Button variant="light" fullWidth onClick={() => submit()}>
               Looks good!
             </Button>
           </Flex>
@@ -199,4 +204,19 @@ export default function OnBoarding() {
       </Stepper>
     </div>
   );
+  async function submit() {
+  
+    console.log(
+      "Submit: " + full_name + avatar_url + description + phone_number + token
+    );
+    
+    for (let i = 0; user != null && i < 1; i++) {
+      const { data, error } = await supabase
+      .from('profiles')
+      .update({ full_name, description, phone_number, token, is_setup: true })
+      .eq('id', user.id)
+    }
+      
+  }
 }
+
