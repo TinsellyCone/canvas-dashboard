@@ -1,6 +1,7 @@
 import { Group, ActionIcon, Menu, Title } from '@mantine/core'
 import { IconDotsVertical, IconCheck } from '@tabler/icons'
 import { useState, useEffect } from 'react'
+import Head from 'next/head'
 
 export default function Titlebar({ title, options, setColorTheme }) {
   const [darkThemeIcon, setDarkThemeIcon] = useState(<IconCheck size={14} />)
@@ -18,6 +19,9 @@ export default function Titlebar({ title, options, setColorTheme }) {
 
   return (
     <Group m={'xl'} position='apart'>
+      <Head>
+        <title>{title} - {process.env.NEXT_PUBLIC_APP_NAME}</title>
+      </Head>
       <Title order={2}>{title}</Title>
       <Menu position='bottom-end' transition='pop-top-right'>
         <Menu.Target>

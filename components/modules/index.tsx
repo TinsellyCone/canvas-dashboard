@@ -13,7 +13,7 @@ export default function Modules({ courseID }) {
   fetcher)
 
   if (token != null) return (
-    <Accordion variant="separated" radius="md" chevronPosition="left" p={24} pt={0}>
+    <Accordion variant="separated" radius="md" chevronPosition="left" p={24} pt={0} multiple>
       {isLoading ? <LoadingOverlay visible /> : data.map((module) => {
         return (
           <>

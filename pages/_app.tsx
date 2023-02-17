@@ -2,20 +2,18 @@ import Head from 'next/head'
 import '@/styles/globals.css'
 import { useEffect, useState } from 'react'
 import Navbar from 'components/navbar'
-import LogIn from '@/components/logIn'
 import type { AppProps } from 'next/app'
 import { MantineProvider, Flex } from '@mantine/core'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
-import { useSession } from '@supabase/auth-helpers-react'
 import useTheme from 'components/lib/useTheme'
+import { Analytics } from '@vercel/analytics/react'
 
 export default function App({ Component, pageProps }: AppProps) {
   const { dark_theme } = useTheme();
   const [colorTheme, setColorTheme] = useState('dark')
   const [supabase] = useState(() => createBrowserSupabaseClient())
-  useEffect(() => {if (dark_theme != null) {setColorTheme(dark_theme == true ? "dark" : "light")}});
-  console.log(dark_theme)
+  // useEffect(() => {if (dark_theme != null) {setColorTheme(dark_theme == true ? "dark" : "light")}});
 
   return (
     <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
@@ -43,6 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Navbar />
           <div style={{ width: '100%', overflow: 'hidden' }}>
             <Component {...pageProps} setColorScheme={setColorTheme} />
+            <Analytics />
           </div>
         </Flex>
       </MantineProvider>
