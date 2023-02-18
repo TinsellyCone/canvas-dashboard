@@ -1,6 +1,6 @@
 import { Stack, ActionIcon, Avatar, useMantineTheme, Menu } from '@mantine/core'
 import { IconLogout, IconSettings, IconUser } from '@tabler/icons'
-import { IconDashboard } from '@tabler/icons'
+import { IconDashboard } from '@tabler/icons-react'
 import { useState } from 'react'
 import Link from 'next/link'
 import SettingsModal from 'components/settings'
@@ -51,7 +51,7 @@ export default function Navbar() {
                 {full_name != null ? full_name.split(" ")[0].charAt(0).toUpperCase() +
                   (full_name.split(" ").length >= 2
                     ? full_name.split(" ")[full_name.split(" ").length - 1].charAt(0)
-                    : "") : ''}
+                    : "").toUpperCase() : ''}
               </Avatar>
             </Menu.Target>
             <Menu.Dropdown>

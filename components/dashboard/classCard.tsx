@@ -65,7 +65,7 @@ export default function ClassCard(props) {
         <Button
           variant='light'
           component={Link}
-          href={'/classes/' + props.id}
+          href={'/class/' + props.id}
           color={props.color}
           style={{ flex: 1 }}
         >

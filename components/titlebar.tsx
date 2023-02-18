@@ -18,14 +18,23 @@ export default function Titlebar({ title, options, setColorTheme }) {
   // })
 
   return (
-    <Group m={'xl'} position='apart'>
+    <Group m={"xl"} position="apart">
       <Head>
-        <title>{title} - {process.env.NEXT_PUBLIC_APP_NAME}</title>
+        <title>
+          {title} - {process.env.NEXT_PUBLIC_APP_NAME}
+        </title>
+        {process.env.NEXT_PUBLIC_DEV == "true" ? (
+          <link rel="icon" href="/preview.svg" type="image/svg+xml" />
+        ) : process.env.NEXT_PUBLIC_AMONGUS == "true" ? (
+          <link rel="icon" href="/amongus.svg" type="image/svg+xml" />
+        ) : (
+          <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        )}
       </Head>
       <Title order={2}>{title}</Title>
-      <Menu position='bottom-end' transition='pop-top-right'>
+      <Menu position="bottom-end" transition="pop-top-right">
         <Menu.Target>
-          <ActionIcon size={'lg'} variant='light'>
+          <ActionIcon size={"lg"} variant="light">
             <IconDotsVertical size={20} />
           </ActionIcon>
         </Menu.Target>
@@ -35,9 +44,9 @@ export default function Titlebar({ title, options, setColorTheme }) {
           <Menu.Item
             icon={lightThemeIcon}
             onClick={() => {
-              setColorTheme('light')
-              setDarkThemeIcon(null)
-              setLightThemeIcon(<IconCheck size={14} />)
+              setColorTheme("light");
+              setDarkThemeIcon(null);
+              setLightThemeIcon(<IconCheck size={14} />);
             }}
           >
             Light Mode
@@ -45,9 +54,9 @@ export default function Titlebar({ title, options, setColorTheme }) {
           <Menu.Item
             icon={darkThemeIcon}
             onClick={() => {
-              setColorTheme('dark')
-              setLightThemeIcon(null)
-              setDarkThemeIcon(<IconCheck size={14} />)
+              setColorTheme("dark");
+              setLightThemeIcon(null);
+              setDarkThemeIcon(<IconCheck size={14} />);
             }}
           >
             Dark Mode
@@ -55,5 +64,5 @@ export default function Titlebar({ title, options, setColorTheme }) {
         </Menu.Dropdown>
       </Menu>
     </Group>
-  )
+  );
 }

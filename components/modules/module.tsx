@@ -1,6 +1,7 @@
 import useSWR from 'swr'
 import useToken from 'components/lib/useToken'
-import { Table } from '@mantine/core';
+import { Table, Anchor, Text } from '@mantine/core';
+import Link from 'next/link';
 
 export default function Module({courseID, moduleID}) {
     const { token, loading } = useToken();
@@ -11,17 +12,13 @@ export default function Module({courseID, moduleID}) {
         '&per_page=40',
         fetcher
     )
-    console.log(data)
-    console.log('/canvas/courses/' + courseID + '/modules/' + moduleID + '/items?access_token=' +
-    token +
-    '&per_page=40')
     if (token != null) return (
       <>
         <Table verticalSpacing={'sm'}>
           <tbody>
             {!isLoading && data != null
               ? data.map((item) => {
-                  return <tr key={item.title}><td>{item.title}</td></tr>;
+                return <tr key={item.title}><td>{item.type != "SubHeader" ? <Anchor href={courseID + "/" + item.type.toLowerCase() + "/" + item.id} component={Link}>{item.title}</Anchor> : <Text fw={700} color={'dimmed'}>{item.title}</Text>}</td></tr>;
                 })
               : <></>}
           </tbody>

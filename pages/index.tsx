@@ -1,6 +1,6 @@
 import { Menu, Badge } from "@mantine/core";
 import LogIn from "components/logIn";
-import { IconCheck } from "@tabler/icons";
+import { IconCheck } from "@tabler/icons-react";
 import Titlebar from "components/titlebar";
 import Dashboard from "components/dashboard/index";
 import { useSession } from "@supabase/auth-helpers-react";

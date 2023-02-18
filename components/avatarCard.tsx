@@ -4,7 +4,7 @@ export default function AvatarCard({ avatarURL, name, description, color }) {
     <Card withBorder radius={"sm"} shadow={"sm"} maw={350} w={"100%"} h={80.5}>
       <Group>
         <Avatar color={color} radius={"xl"} src={avatarURL}>
-          {name.split(" ")[0].charAt(0).toUpperCase() + (name.split(" ").length >= 2 ? name.split(" ")[name.split(" ").length - 1].charAt(0) : "")}
+          {name.split(" ")[0].charAt(0).toUpperCase() + (name.split(" ").length >= 2 ? name.split(" ")[name.split(" ").length - 1].charAt(0).toUpperCase() : "")}
         </Avatar>
         <Stack spacing={0}>
           <Text

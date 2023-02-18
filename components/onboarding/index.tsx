@@ -9,12 +9,15 @@ import {
   Code,
   Group,
   Stack,
+  ActionIcon,
 } from "@mantine/core";
+import Head from "next/head";
 import { useState } from "react";
 import InputMask from "react-input-mask";
 import AvatarCard from 'components/avatarCard'
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { IconArrowLeft } from "@tabler/icons-react";
 import { useUser } from "@supabase/auth-helpers-react";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export default function OnBoarding() {
   const [avatar_url, setAvatar] = useState("");
@@ -44,6 +47,9 @@ export default function OnBoarding() {
 
   return (
     <div style={{ padding: 24, height: "100%" }}>
+      <Head>
+        <title>Onboarding - {process.env.NEXT_PUBLIC_APP_NAME}</title>
+      </Head>
       <Stepper
         h={"100%"}
         p={24}
@@ -100,11 +106,11 @@ export default function OnBoarding() {
               name={full_name}
               avatarURL={avatar_url}
               description={description}
-              color={'blue'}
+              color={"blue"}
             />
             <TextInput
               onChange={(event) => setName(event.target.value)}
-              placeholder="John Doe"
+              placeholder="Type something..."
               value={full_name}
               w={"100%"}
               description="Enter your full name"
@@ -112,7 +118,7 @@ export default function OnBoarding() {
             />
             <TextInput
               onChange={(event) => setDescription(event.target.value)}
-              placeholder="I love school so much"
+              placeholder="Type something..."
               value={description}
               w={"100%"}
               description="Keep it short and sweet"
@@ -140,16 +146,25 @@ export default function OnBoarding() {
               description="By default, this won't be displayed"
               label="Phone Number"
             /> */}
-            <Button
-              variant="light"
-              onClick={() => {
-                if (full_name != "" && phone_number != "")
-                  handleStepChange(active + 1);
-              }}
-              fullWidth
-            >
-              Contine
-            </Button>
+            <Group w={"100%"} noWrap spacing={'xs'}>
+              <ActionIcon
+                onClick={() => handleStepChange(active - 1)}
+                variant="light"
+                size={"lg"}
+              >
+                <IconArrowLeft size={18} />
+              </ActionIcon>
+              <Button
+                variant="light"
+                onClick={() => {
+                  if (full_name != "" && phone_number != "")
+                    handleStepChange(active + 1);
+                }}
+                fullWidth
+              >
+                Contine
+              </Button>
+            </Group>
           </Flex>
         </Stepper.Step>
         <Stepper.Step label="Preferences" description="Customize everything">
@@ -163,13 +178,22 @@ export default function OnBoarding() {
             gap={25}
             style={{ margin: "0 auto", marginTop: 16 }}
           >
-            <Button
-              variant="light"
-              onClick={() => handleStepChange(active + 1)}
-              fullWidth
-            >
-              Contine
-            </Button>
+            <Group w={"100%"} noWrap spacing={'xs'}>
+              <ActionIcon
+                onClick={() => handleStepChange(active - 1)}
+                variant="light"
+                size={"lg"}
+              >
+                <IconArrowLeft size={18} />
+              </ActionIcon>
+              <Button
+                variant="light"
+                onClick={() => handleStepChange(active + 1)}
+                fullWidth
+              >
+                Contine
+              </Button>
+            </Group>
           </Flex>
         </Stepper.Step>
         <Stepper.Completed>
@@ -186,12 +210,12 @@ export default function OnBoarding() {
             <Text fz={35} fw={700}>
               Summary
             </Text>
-            <Divider w={"100%"} />
+            <Divider w={"100%"} my={10} />
             <AvatarCard
               name={full_name}
               description={description}
               avatarURL={avatar_url}
-              color={'blue'}
+              color={"blue"}
             />
             <Stack spacing={3} w={"100%"}>
               <Group spacing={0}>
@@ -206,14 +230,23 @@ export default function OnBoarding() {
                 </Code>
               </Group>
             </Stack>
-            <Button
-              disabled={loading}
-              variant="light"
-              fullWidth
-              onClick={() => submit()}
-            >
-              Looks good!
-            </Button>
+            <Group w={"100%"} noWrap spacing={'xs'}>
+              <ActionIcon
+                onClick={() => handleStepChange(active - 1)}
+                variant="light"
+                size={"lg"}
+              >
+                <IconArrowLeft size={18} />
+              </ActionIcon>
+              <Button
+                disabled={loading}
+                variant="light"
+                fullWidth
+                onClick={() => submit()}
+              >
+                Looks good!
+              </Button>
+            </Group>
           </Flex>
         </Stepper.Completed>
       </Stepper>
