@@ -68,10 +68,11 @@ export default function ClassCard(props) {
           href={'/class/' + props.id}
           color={props.color}
           style={{ flex: 1 }}
+          radius={process.env.NEXT_PUBLIC_RADIUS}
         >
           View
         </Button>
-        <ActionIcon size={36} variant='light' onClick={() => setOpened(true)}>
+        <ActionIcon size={36} variant='light' onClick={() => setOpened(true)} radius={process.env.NEXT_PUBLIC_RADIUS}>
           <IconDotsVertical size={20} />
         </ActionIcon>
       </Group>
@@ -88,6 +89,7 @@ export default function ClassCard(props) {
           label='Card Color'
           value={props.cardColor}
           my={10}
+          radius={process.env.NEXT_PUBLIC_INPUT_RADIUS}
         />
         <Badge color={'red'}>Placeholder</Badge>
         <NumberInput
@@ -96,12 +98,14 @@ export default function ClassCard(props) {
           label='Card Position'
           my={10}
           min={1}
+          radius={process.env.NEXT_PUBLIC_INPUT_RADIUS}
         />
         <Button
           mt={10}
           variant={'light'}
           onClick={() => setOpened(false)}
           color={'gray'}
+          radius={process.env.NEXT_PUBLIC_RADIUS}
         >
           Close
         </Button>

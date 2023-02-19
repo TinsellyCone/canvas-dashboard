@@ -79,6 +79,7 @@ export default function OnBoarding() {
               w={"100%"}
               description="Generated in Canvas account settings"
               label="Canvas Access Token"
+              radius={process.env.NEXT_PUBLIC_INPUT_RADIUS}
             />
             <Button
               variant="light"
@@ -86,6 +87,7 @@ export default function OnBoarding() {
                 if (token != "") handleStepChange(active + 1);
               }}
               fullWidth
+              radius={process.env.NEXT_PUBLIC_RADIUS}
             >
               Contine
             </Button>
@@ -115,6 +117,7 @@ export default function OnBoarding() {
               w={"100%"}
               description="Enter your full name"
               label="Name"
+              radius={process.env.NEXT_PUBLIC_INPUT_RADIUS}
             />
             <TextInput
               onChange={(event) => setDescription(event.target.value)}
@@ -123,6 +126,7 @@ export default function OnBoarding() {
               w={"100%"}
               description="Keep it short and sweet"
               label="Description"
+              radius={process.env.NEXT_PUBLIC_INPUT_RADIUS}
             />
             <Input.Wrapper
               w={"100%"}
@@ -136,6 +140,7 @@ export default function OnBoarding() {
                 onChange={(event) => setNumber(event.target.value)}
                 placeholder="+1 (123) 456-7890"
                 value={phone_number}
+                radius={process.env.NEXT_PUBLIC_INPUT_RADIUS}
               />
             </Input.Wrapper>
             {/* <TextInput
@@ -151,6 +156,7 @@ export default function OnBoarding() {
                 onClick={() => handleStepChange(active - 1)}
                 variant="light"
                 size={"lg"}
+                radius={process.env.NEXT_PUBLIC_RADIUS}
               >
                 <IconArrowLeft size={18} />
               </ActionIcon>
@@ -161,6 +167,7 @@ export default function OnBoarding() {
                     handleStepChange(active + 1);
                 }}
                 fullWidth
+                radius={process.env.NEXT_PUBLIC_RADIUS}
               >
                 Contine
               </Button>
@@ -183,6 +190,7 @@ export default function OnBoarding() {
                 onClick={() => handleStepChange(active - 1)}
                 variant="light"
                 size={"lg"}
+                radius={process.env.NEXT_PUBLIC_RADIUS}
               >
                 <IconArrowLeft size={18} />
               </ActionIcon>
@@ -190,6 +198,7 @@ export default function OnBoarding() {
                 variant="light"
                 onClick={() => handleStepChange(active + 1)}
                 fullWidth
+                radius={process.env.NEXT_PUBLIC_RADIUS}
               >
                 Contine
               </Button>
@@ -235,6 +244,7 @@ export default function OnBoarding() {
                 onClick={() => handleStepChange(active - 1)}
                 variant="light"
                 size={"lg"}
+                radius={process.env.NEXT_PUBLIC_RADIUS}
               >
                 <IconArrowLeft size={18} />
               </ActionIcon>
@@ -243,6 +253,7 @@ export default function OnBoarding() {
                 variant="light"
                 fullWidth
                 onClick={() => submit()}
+                radius={process.env.NEXT_PUBLIC_RADIUS}
               >
                 Looks good!
               </Button>

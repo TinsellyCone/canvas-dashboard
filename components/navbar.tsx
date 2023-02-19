@@ -34,7 +34,7 @@ export default function Navbar() {
         justify={"space-between"}
       >
         <Stack>
-          <ActionIcon size={"lg"} variant="light" component={Link} href="/">
+          <ActionIcon size={"lg"} variant="light" component={Link} href="/" radius={process.env.NEXT_PUBLIC_RADIUS}>
             <IconDashboard size={20} />
           </ActionIcon>
         </Stack>

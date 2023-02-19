@@ -34,7 +34,7 @@ export default function Titlebar({ title, options, setColorTheme }) {
       <Title order={2}>{title}</Title>
       <Menu position="bottom-end" transition="pop-top-right">
         <Menu.Target>
-          <ActionIcon size={"lg"} variant="light">
+          <ActionIcon size={"lg"} variant="light" radius={process.env.NEXT_PUBLIC_RADIUS}>
             <IconDotsVertical size={20} />
           </ActionIcon>
         </Menu.Target>
