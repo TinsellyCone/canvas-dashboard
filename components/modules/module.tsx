@@ -18,7 +18,7 @@ export default function Module({courseID, moduleID}) {
           <tbody>
             {!isLoading && data != null
               ? data.map((item) => {
-                return <tr key={item.title}><td>{item.type != "SubHeader" ? <Anchor href={courseID + "/" + item.type.toLowerCase() + "/" + item.id} component={Link}>{item.title}</Anchor> : <Text fw={700} color={'dimmed'}>{item.title}</Text>}</td></tr>;
+                return <tr key={item.title}><td>{item.type != "SubHeader" ? <Anchor href={courseID + "/module/" + moduleID + "/item/" + item.id} component={Link}>{item.title}</Anchor> : <Text fw={700} color={'dimmed'}>{item.title}</Text>}</td></tr>;
                 })
               : <></>}
           </tbody>
