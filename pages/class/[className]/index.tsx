@@ -15,8 +15,8 @@ export default function Index({ setColorScheme }) {
 
   return (
     <>
-      <Titlebar title={'Modules'} setColorTheme={setColorScheme} />
-      <Modules courseID={router.query.className} setColorScheme={setColorScheme} />
+      <Titlebar title={'Modules'} setColorTheme={setColorScheme} backURL={'/'} />
+      <Modules courseID={router.query.className} />
     </>
   )
 }

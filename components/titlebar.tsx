@@ -1,9 +1,11 @@
-import { Group, ActionIcon, Menu, Title } from '@mantine/core'
+import { Group, ActionIcon, Menu, Title, Stack, Anchor } from '@mantine/core'
 import { IconDotsVertical, IconCheck } from '@tabler/icons'
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
+import { IconArrowLeft } from '@tabler/icons-react'
+import Link from 'next/link'
 
-export default function Titlebar({ title, options, setColorTheme }) {
+export default function Titlebar({ title, options, setColorTheme, backURL }) {
   const [darkThemeIcon, setDarkThemeIcon] = useState(<IconCheck size={14} />)
   const [lightThemeIcon, setLightThemeIcon] = useState(null)
 
@@ -31,10 +33,18 @@ export default function Titlebar({ title, options, setColorTheme }) {
           <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         )}
       </Head>
-      <Title order={2}>{title}</Title>
+        {backURL != (null) ? <Link href={backURL} style={{color: 'unset', textDecoration: 'none'}}>
+          <Title order={2}>
+            <IconArrowLeft size={24} style={{marginRight: 8}} />{title}
+          </Title>
+    </Link>: <Title order={2}>{title}</Title>}
       <Menu position="bottom-end" transition="pop-top-right">
         <Menu.Target>
-          <ActionIcon size={"lg"} variant="light" radius={process.env.NEXT_PUBLIC_RADIUS}>
+          <ActionIcon
+            size={"lg"}
+            variant="light"
+            radius={process.env.NEXT_PUBLIC_RADIUS}
+          >
             <IconDotsVertical size={20} />
           </ActionIcon>
         </Menu.Target>
