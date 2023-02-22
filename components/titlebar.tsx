@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { IconArrowLeft } from '@tabler/icons-react'
 import Link from 'next/link'
+import { useMantineColorScheme } from '@mantine/core'
 
-export default function Titlebar({ title, options, setColorTheme, backURL }) {
-  const [darkThemeIcon, setDarkThemeIcon] = useState(<IconCheck size={14} />)
-  const [lightThemeIcon, setLightThemeIcon] = useState(null)
+export default function Titlebar({ title, options, backURL }) {
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
   // useEffect(() => {
   //   if (pb.authStore.model?.light) {
@@ -33,11 +33,16 @@ export default function Titlebar({ title, options, setColorTheme, backURL }) {
           <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         )}
       </Head>
-        {backURL != (null) ? <Link href={backURL} style={{color: 'unset', textDecoration: 'none'}}>
+      {backURL != null ? (
+        <Link href={backURL} style={{ color: "unset", textDecoration: "none" }}>
           <Title order={2}>
-            <IconArrowLeft size={24} style={{marginRight: 8}} />{title}
+            <IconArrowLeft size={24} style={{ marginRight: 8 }} />
+            {title}
           </Title>
-    </Link>: <Title order={2}>{title}</Title>}
+        </Link>
+      ) : (
+        <Title order={2}>{title}</Title>
+      )}
       <Menu position="bottom-end" transition="pop-top-right">
         <Menu.Target>
           <ActionIcon
@@ -52,22 +57,38 @@ export default function Titlebar({ title, options, setColorTheme, backURL }) {
           {options}
           <Menu.Label>Appearance</Menu.Label>
           <Menu.Item
-            icon={lightThemeIcon}
-            onClick={() => {
-              setColorTheme("light");
-              setDarkThemeIcon(null);
-              setLightThemeIcon(<IconCheck size={14} />);
-            }}
+            icon={
+              colorScheme == "light" ? (
+                <IconCheck size={14} />
+              ) : (
+                <div style={{ width: 14 }}></div>
+              )
+            }
+            onClick={
+              colorScheme == "dark"
+                ? () => {
+                    toggleColorScheme();
+                  }
+                : () => {}
+            }
           >
             Light Mode
           </Menu.Item>
           <Menu.Item
-            icon={darkThemeIcon}
-            onClick={() => {
-              setColorTheme("dark");
-              setLightThemeIcon(null);
-              setDarkThemeIcon(<IconCheck size={14} />);
-            }}
+            icon={
+              colorScheme == "light" ? (
+                <div style={{ width: 14 }}></div>
+              ) : (
+                <IconCheck size={14} />
+              )
+            }
+            onClick={
+              colorScheme == "light"
+                ? () => {
+                    toggleColorScheme();
+                  }
+                : () => {}
+            }
           >
             Dark Mode
           </Menu.Item>

@@ -15,7 +15,6 @@ import {
 import { IconNotebook, IconDotsVertical, IconCheck } from '@tabler/icons'
 import Link from 'next/link'
 import { useState } from 'react'
-import styles from './classCard.module.css'
 
 function ActiveBadge(props) {
   if (props.active) {
@@ -29,7 +28,7 @@ export default function ClassCard(props) {
 
   const [opened, setOpened] = useState(false)
   return (
-    <Card w={300} shadow={'lg'} radius={'md'} p={'lg'} withBorder className={styles.card}>
+    <Card w={300} shadow={'lg'} radius={'md'} p={'lg'} withBorder>
       <Card.Section>
         <Image src={props.imagePath} height={175} withPlaceholder></Image>
       </Card.Section>

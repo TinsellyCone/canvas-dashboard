@@ -7,73 +7,95 @@ import {
   SegmentedControl,
   Text,
   Group,
+  useMantineColorScheme,
+  Divider,
+  Title
 } from '@mantine/core'
 import { useState } from 'react'
 
 export default function SettingsModal({ isSettingsOpen, setSettingsOpen }) {
   const [activeTab, setActiveTab] = useState('profile')
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme()
   return (
     <Modal
-      overflow={'inside'}
-      size={'lg'}
+      overflow={"inside"}
+      size={"xl"}
       onClose={() => setSettingsOpen(false)}
       opened={isSettingsOpen}
-      title={'Settings'}
+      title={"Settings"}
       centered
     >
       <Flex gap={20} pb={30}>
         <Stack spacing={0}>
           <NavLink
-            label={'Profile'}
+            label={"Profile"}
             w={150}
-            onClick={() => setActiveTab('profile')}
+            onClick={() => setActiveTab("profile")}
           />
-          <NavLink label={'API'} w={150} onClick={() => setActiveTab('api')} />
+          <NavLink label={"API"} w={150} onClick={() => setActiveTab("api")} />
           <NavLink
-            label={'Display'}
+            label={"Display"}
             w={150}
-            onClick={() => setActiveTab('display')}
+            onClick={() => setActiveTab("display")}
           />
         </Stack>
-        {activeTab == 'profile' ? (
-          <Stack>
-            <Text fz={'xl'} fw={700} mt={0}>
-              Profile Settings
-            </Text>
-            <Switch label={'Public Profile'} />
-            <Switch label={'Public Profile'} />
-            <Switch label={'Public Profile'} />
-          </Stack>
-        ) : null}
-        {activeTab == 'api' ? (
-          <Stack>
-            <Text fz={'xl'} fw={700} mt={0}>
-              API Settings
-            </Text>
-            <Switch label={'Public Profile'} />
-            <Switch label={'Public Profile'} />
-            <Switch label={'Public Profile'} />
-          </Stack>
-        ) : null}
-        {activeTab == 'display' ? (
-          <Stack>
-            <Text fz={'xl'} fw={700} mt={0}>
+        {activeTab == "profile" ? (
+          <Stack w={"100%"}>
+            <Title order={2} fw={700} mt={0}>
               Display Settings
-            </Text>
-            <Stack spacing={5}>
-              <Text fz={'sm'}>Color Scheme:</Text>
+            </Title>
+            <Group position={"apart"}>
+              <Stack spacing={0}>
+                <Text fw={600} fz={"md"}>
+                  Profile Publicity
+                </Text>
+                <Text fz={"sm"} color={"dimmed"}>
+                  Whether or not your profile should be shown to classmates
+                </Text>
+              </Stack>
+              <Switch />
+            </Group>
+          </Stack>
+        ) : null}
+        {activeTab == "api" ? (
+          <Stack w={"100%"}>
+            <Title order={2} fw={700} mt={0}>
+              API Settings
+            </Title>
+            <Switch label={"Public Profile"} />
+            <Switch label={"Public Profile"} />
+            <Switch label={"Public Profile"} />
+          </Stack>
+        ) : null}
+        {activeTab == "display" ? (
+          <Stack w={"100%"}>
+            <Title order={2} fw={700} mt={0}>
+              Display Settings
+            </Title>
+            <Group position={"apart"}>
+              <Stack spacing={0}>
+                <Text fw={600} fz={"md"}>
+                  Color Scheme
+                </Text>
+                <Text fz={"sm"} color={"dimmed"}>
+                  Change the appearance of the website
+                </Text>
+              </Stack>
               <SegmentedControl
+                value={colorScheme}
+                onChange={(value: "light" | "dark") => toggleColorScheme(value)}
                 data={[
-                  { label: 'Light', value: 'light' },
-                  { label: 'Dark', value: 'dark' },
+                  { label: "Light", value: "light" },
+                  { label: "Dark", value: "dark" },
                 ]}
+                w={"min-content"}
               />
-            </Stack>
-            <Switch label={'Public Profile'} />
-            <Switch label={'Public Profile'} />
+            </Group>
+            <Switch label={"Public Profile"} />
+            <Switch label={"Public Profile"} />
           </Stack>
         ) : null}
       </Flex>
     </Modal>
-  )
+  );
 }
