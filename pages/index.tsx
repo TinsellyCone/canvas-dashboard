@@ -7,7 +7,7 @@ import { useSession } from "@supabase/auth-helpers-react";
 import useProfile from "@/components/lib/useProfile";
 import OnBoarding from "components/onboarding";
 
-export default function Index({ setColorScheme }) {
+export default function Index() {
   const titlebarOptions = (
     <>
       <Menu.Label>Dashboard View</Menu.Label>
@@ -41,7 +41,6 @@ export default function Index({ setColorScheme }) {
       <Titlebar
         title="Dashboard"
         options={titlebarOptions}
-        setColorTheme={setColorScheme}
       />
       <Dashboard />
     </>

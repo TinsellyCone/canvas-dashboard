@@ -84,10 +84,12 @@ export default function Navbar() {
           </Menu>
         </Stack>
       </Stack>
-      <SettingsModal
-        setSettingsOpen={setSettingsOpen}
-        isSettingsOpen={isSettingsOpen}
-      />
+      <div style={{zIndex: 100}}>
+        <SettingsModal
+          setSettingsOpen={setSettingsOpen}
+          isSettingsOpen={isSettingsOpen}
+        />
+      </div>
     </div>
   );
 }
