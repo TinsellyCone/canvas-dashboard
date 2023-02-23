@@ -12,6 +12,7 @@ import {
   Title
 } from '@mantine/core'
 import { useState } from 'react'
+import Option from './settingsoption'
 
 export default function SettingsModal({ isSettingsOpen, setSettingsOpen }) {
   const [activeTab, setActiveTab] = useState('profile')
@@ -44,17 +45,7 @@ export default function SettingsModal({ isSettingsOpen, setSettingsOpen }) {
             <Title order={2} fw={700} mt={0}>
               Display Settings
             </Title>
-            <Group position={"apart"}>
-              <Stack spacing={0}>
-                <Text fw={600} fz={"md"}>
-                  Profile Publicity
-                </Text>
-                <Text fz={"sm"} color={"dimmed"}>
-                  Whether or not your profile should be shown to classmates
-                </Text>
-              </Stack>
-              <Switch />
-            </Group>
+            <Option title={'Profile Publicity'} description={'Should your profile be shown to other students'} option={<Switch />} />
           </Stack>
         ) : null}
         {activeTab == "api" ? (
@@ -82,6 +73,7 @@ export default function SettingsModal({ isSettingsOpen, setSettingsOpen }) {
                 </Text>
               </Stack>
               <SegmentedControl
+                radius={process.env.NEXT_PUBLIC_RADIUS}
                 value={colorScheme}
                 onChange={(value: "light" | "dark") => toggleColorScheme(value)}
                 data={[
