@@ -11,12 +11,14 @@ import {
   Modal,
   ColorInput,
   NumberInput,
+  Skeleton
 } from '@mantine/core'
 import { IconNotebook, IconDotsVertical, IconCheck } from '@tabler/icons'
 import Link from 'next/link'
 import { useState } from 'react'
 import useSWR from 'swr'
 import useToken from 'components/lib/useToken'
+import SkeletonCard from './skeletonCard'
 
 function ActiveBadge(props) {
   if (props.active) {
@@ -61,15 +63,35 @@ export default function ClassCard(props) {
 
       <Stack spacing={"xs"}>
         <Group position="left" spacing={"xs"}>
-          <IconNotebook size={"20"} color={"gray"} />
+          {isLoading ? (
+            <Skeleton w={20} h={20} />
+          ) : (
+            <IconNotebook size={"20"} color={"gray"} />
+          )}
           <Text color={"dimmed"} size={"sm"} lineClamp={1} maw={200}>
-            {data && data[0] != null ? data[0].name : <></>}
+            {!isLoading ? (
+              data[0] != null ? (
+                data[0].name
+              ) : null
+            ) : (
+              <Skeleton visible h={15} w={75} />
+            )}
           </Text>
         </Group>
         <Group position="left" spacing={"xs"}>
-          <IconNotebook size={"20"} color={"gray"} />
+          {isLoading ? (
+            <Skeleton w={20} h={20} />
+          ) : (
+            <IconNotebook size={"20"} color={"gray"} />
+          )}
           <Text color={"dimmed"} size={"sm"} lineClamp={1} maw={200}>
-            {data && data[1] != null ? data[1].name : <></>}
+            {!isLoading ? (
+              data[1] != null ? (
+                data[1].name
+              ) : null
+            ) : (
+              <Skeleton visible h={15} w={75} />
+            )}
           </Text>
         </Group>
       </Stack>
