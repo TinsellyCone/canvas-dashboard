@@ -26,7 +26,7 @@ export default function SettingsModal({ isSettingsOpen, setSettingsOpen }) {
       title={"Settings"}
       centered
     >
-      <Flex gap={20} pb={30}>
+      <Flex gap={20} pb={30} mih={450}>
         <Stack spacing={0}>
           <NavLink
             label={"Profile"}
@@ -43,7 +43,7 @@ export default function SettingsModal({ isSettingsOpen, setSettingsOpen }) {
         {activeTab == "profile" ? (
           <Stack w={"100%"}>
             <Title order={2} fw={700} mt={0}>
-              Display Settings
+              Profile Settings
             </Title>
             <Option title={'Profile Publicity'} description={'Should your profile be shown to other students'} option={<Switch />} />
           </Stack>
@@ -53,9 +53,6 @@ export default function SettingsModal({ isSettingsOpen, setSettingsOpen }) {
             <Title order={2} fw={700} mt={0}>
               API Settings
             </Title>
-            <Switch label={"Public Profile"} />
-            <Switch label={"Public Profile"} />
-            <Switch label={"Public Profile"} />
           </Stack>
         ) : null}
         {activeTab == "display" ? (
@@ -63,16 +60,7 @@ export default function SettingsModal({ isSettingsOpen, setSettingsOpen }) {
             <Title order={2} fw={700} mt={0}>
               Display Settings
             </Title>
-            <Group position={"apart"}>
-              <Stack spacing={0}>
-                <Text fw={600} fz={"md"}>
-                  Color Scheme
-                </Text>
-                <Text fz={"sm"} color={"dimmed"}>
-                  Change the appearance of the website
-                </Text>
-              </Stack>
-              <SegmentedControl
+            <Option title={'Appearance'} description={'Switch between light and dark theme'} option={<SegmentedControl
                 radius={process.env.NEXT_PUBLIC_RADIUS}
                 value={colorScheme}
                 onChange={(value: "light" | "dark") => toggleColorScheme(value)}
@@ -81,10 +69,7 @@ export default function SettingsModal({ isSettingsOpen, setSettingsOpen }) {
                   { label: "Dark", value: "dark" },
                 ]}
                 w={"min-content"}
-              />
-            </Group>
-            <Switch label={"Public Profile"} />
-            <Switch label={"Public Profile"} />
+              />} />
           </Stack>
         ) : null}
       </Flex>

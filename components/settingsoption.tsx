@@ -5,10 +5,10 @@ export default function Option({ title, description, option }) {
     <Group position={"apart"}>
       <Stack spacing={0}>
         <Text fw={600} fz={"md"}>
-          Profile Publicity
+          {title}
         </Text>
         <Text fz={"sm"} color={"dimmed"}>
-          Whether or not your profile should be shown to classmates
+          {description}
         </Text>
       </Stack>
       {option}
