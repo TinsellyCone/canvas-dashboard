@@ -1,6 +1,7 @@
 import useSWR from 'swr'
-import { LoadingOverlay } from '@mantine/core'
+import { LoadingOverlay, Skeleton } from '@mantine/core'
 import ClassCard from 'components/dashboard/classCard'
+import SkeletonCard from 'components/dashboard/skeletonCard'
 import useToken from 'components/lib/useToken'
 
 export default function Dashboard() {
@@ -16,17 +17,21 @@ export default function Dashboard() {
   if (token != null) return (
     <div
       style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 300px))',
-        justifyContent: 'start',
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 300px))",
+        justifyContent: "start",
         gap: 15,
         paddingLeft: 24,
         paddingRight: 24,
-        paddingBottom: 24
+        paddingBottom: 24,
       }}
     >
       {isLoading ? (
-        <LoadingOverlay visible />
+        <>
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+        </>
       ) : (
         data.map((currentClass) => {
           return (
@@ -37,9 +42,9 @@ export default function Dashboard() {
               id={currentClass.id}
               key={currentClass.id}
             />
-          )
+          );
         })
       )}
     </div>
-  )
+  );
 }
