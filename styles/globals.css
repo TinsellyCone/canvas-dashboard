@@ -1,0 +1,4 @@
+.ProseMirror {
+  height: 275px !important;
+  overflow-y: scroll;
+}

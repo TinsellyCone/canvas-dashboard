@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Navbar from 'components/navbar'
 import type { AppProps } from 'next/app'
 import { MantineProvider, Flex, ColorSchemeProvider, ColorScheme } from '@mantine/core'
+import { NotificationsProvider } from "@mantine/notifications";
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import useTheme from 'components/lib/useTheme'
@@ -46,13 +47,15 @@ export default function App({ Component, pageProps }: AppProps) {
           withNormalizeCSS
           theme={{ colorScheme }}
         >
-          <Flex direction="row" style={{ maxWidth: "100vw" }}>
-            <Navbar />
-            <div style={{ width: "100%", overflow: "hidden" }}>
-              <Component {...pageProps} />
-              <Analytics />
-            </div>
-          </Flex>
+          <NotificationsProvider limit={5}>
+            <Flex direction="row" style={{ maxWidth: "100vw" }}>
+              <Navbar />
+              <div style={{ width: "100%", overflow: "hidden" }}>
+                <Component {...pageProps} />
+                <Analytics />
+              </div>
+            </Flex>
+          </NotificationsProvider>
         </MantineProvider>
       </ColorSchemeProvider>
     </SessionContextProvider>
