@@ -5,12 +5,11 @@ import {
   Flex,
   NavLink,
   SegmentedControl,
-  Text,
-  Group,
   useMantineColorScheme,
-  Divider,
-  Title
+  Title,
+  MantineNumberSize
 } from '@mantine/core'
+import { IconDeviceDesktop, IconLink, IconUser } from '@tabler/icons-react'
 import { useState } from 'react'
 import Option from './settingsoption'
 
@@ -30,14 +29,24 @@ export default function SettingsModal({ isSettingsOpen, setSettingsOpen }) {
         <Stack spacing={0}>
           <NavLink
             label={"Profile"}
+            icon={<IconUser size={16} />}
             w={150}
             onClick={() => setActiveTab("profile")}
+            active={activeTab == "profile"}
           />
-          <NavLink label={"API"} w={150} onClick={() => setActiveTab("api")} />
+          <NavLink
+            label={"API"}
+            icon={<IconLink size={16} />}
+            w={150}
+            onClick={() => setActiveTab("api")}
+            active={activeTab == "api"}
+          />
           <NavLink
             label={"Display"}
+            icon={<IconDeviceDesktop size={16} />}
             w={150}
             onClick={() => setActiveTab("display")}
+            active={activeTab == "display"}
           />
         </Stack>
         {activeTab == "profile" ? (
@@ -45,7 +54,11 @@ export default function SettingsModal({ isSettingsOpen, setSettingsOpen }) {
             <Title order={2} fw={700} mt={0}>
               Profile Settings
             </Title>
-            <Option title={'Profile Publicity'} description={'Should your profile be shown to other students'} option={<Switch />} />
+            <Option
+              title={"Profile Publicity"}
+              description={"Should your profile be shown to other students"}
+              option={<Switch />}
+            />
           </Stack>
         ) : null}
         {activeTab == "api" ? (
@@ -60,16 +73,24 @@ export default function SettingsModal({ isSettingsOpen, setSettingsOpen }) {
             <Title order={2} fw={700} mt={0}>
               Display Settings
             </Title>
-            <Option title={'Appearance'} description={'Switch between light and dark theme'} option={<SegmentedControl
-                radius={process.env.NEXT_PUBLIC_RADIUS}
-                value={colorScheme}
-                onChange={(value: "light" | "dark") => toggleColorScheme(value)}
-                data={[
-                  { label: "Light", value: "light" },
-                  { label: "Dark", value: "dark" },
-                ]}
-                w={"min-content"}
-              />} />
+            <Option
+              title={"Appearance"}
+              description={"Switch between light and dark theme"}
+              option={
+                <SegmentedControl
+                  radius={process.env.NEXT_PUBLIC_RADIUS as MantineNumberSize}
+                  value={colorScheme}
+                  onChange={(value: "light" | "dark") =>
+                    toggleColorScheme(value)
+                  }
+                  data={[
+                    { label: "Light", value: "light" },
+                    { label: "Dark", value: "dark" },
+                  ]}
+                  w={"min-content"}
+                />
+              }
+            />
           </Stack>
         ) : null}
       </Flex>

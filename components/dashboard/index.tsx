@@ -6,7 +6,7 @@ import useToken from 'components/lib/useToken'
 import { updateNotification } from "@mantine/notifications";
 import { IconCheck } from "@tabler/icons-react"
 
-export default function Dashboard() {
+export default function Dashboard(): JSX.Element {
   const { token } = useToken();
   const fetcher = (...args) => fetch(...args).then((res) => res.json())
   const { data, error, isLoading } = useSWR(
@@ -64,4 +64,5 @@ export default function Dashboard() {
       )}
     </div>
   );
+  else return <></>
 }

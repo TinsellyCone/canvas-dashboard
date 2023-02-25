@@ -1,4 +1,4 @@
-import { Stack, ActionIcon, Avatar, useMantineTheme, Menu } from '@mantine/core'
+import { Stack, ActionIcon, Avatar, useMantineTheme, Menu, MantineNumberSize } from '@mantine/core'
 import { IconLogout, IconSettings, IconUser } from '@tabler/icons'
 import { IconDashboard } from '@tabler/icons-react'
 import { useState } from 'react'
@@ -17,7 +17,7 @@ export default function Navbar() {
   const { name: full_name } = useName()
 
   return (
-    <div style={{ zIndex: 1000 }}>
+    <div style={{ zIndex: 99 }}>
       <Stack
         p={"sm"}
         style={{ outline: "1px solid dimmed" }}
@@ -34,7 +34,7 @@ export default function Navbar() {
         justify={"space-between"}
       >
         <Stack>
-          <ActionIcon size={"lg"} variant="light" component={Link} href="/" radius={process.env.NEXT_PUBLIC_RADIUS}>
+          <ActionIcon size={"lg"} variant="light" component={Link} href="/" radius={process.env.NEXT_PUBLIC_RADIUS as MantineNumberSize}>
             <IconDashboard size={20} />
           </ActionIcon>
         </Stack>
@@ -48,14 +48,14 @@ export default function Navbar() {
                 radius={"xl"}
                 color={'blue'}
               >
-                {full_name != null ? full_name.split(" ")[0].charAt(0).toUpperCase() +
+                {full_name != undefined ? full_name.split(" ")[0].charAt(0).toUpperCase() +
                   (full_name.split(" ").length >= 2
                     ? full_name.split(" ")[full_name.split(" ").length - 1].charAt(0)
                     : "").toUpperCase() : ''}
               </Avatar>
             </Menu.Target>
             <Menu.Dropdown>
-              {full_name != null ? (
+              {full_name != undefined ? (
                 <>
                   <Menu.Label>Hi, {full_name.split(" ")[0]}!</Menu.Label>
                   <Menu.Divider />
@@ -84,12 +84,10 @@ export default function Navbar() {
           </Menu>
         </Stack>
       </Stack>
-      <div style={{zIndex: 100}}>
         <SettingsModal
           setSettingsOpen={setSettingsOpen}
           isSettingsOpen={isSettingsOpen}
         />
-      </div>
     </div>
   );
 }
