@@ -4,7 +4,7 @@ import Module from './module'
 import useToken from 'components/lib/useToken'
 import { Accordion } from '@mantine/core'
 
-export default function Modules({ courseID }) {
+export default function Modules({ courseID }): JSX.Element {
   const { token } = useToken();
   const fetcher = (...args) => fetch(...args).then((res) => res.json())
   const { data, error, isLoading } = useSWR('/canvas/courses/' + courseID + '/modules?access_token=' +
@@ -14,7 +14,7 @@ export default function Modules({ courseID }) {
 
   if (token != null) return (
     <Accordion variant="separated" radius="md" chevronPosition="left" p={24} pt={0} multiple>
-      {isLoading ? <LoadingOverlay visible /> : data.map((module) => {
+      {isLoading ? <LoadingOverlay visible={false} /> : data.map((module) => {
         return (
           <>
             <Accordion.Item value={module.name}>
@@ -28,4 +28,5 @@ export default function Modules({ courseID }) {
       })}
     </Accordion>
   )
+  else return <></>
 }

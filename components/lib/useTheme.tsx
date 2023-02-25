@@ -3,12 +3,13 @@ import {
   useUser,
   useSupabaseClient,
 } from "@supabase/auth-helpers-react";
+import { PostgrestError } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
 export default function useTheme() {
   const [dark_theme, setTheme] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<PostgrestError | undefined>(undefined);
 
   const session = useSession();
   const supabase = useSupabaseClient();
@@ -28,10 +29,10 @@ export default function useTheme() {
         if (error) setError(error);
         if (data) {
           setTheme(data.dark_theme);
-          setError(null);
+          setError(undefined);
         }
         setLoading(false);
-      } catch (err) {
+      } catch (err: any) {
         alert(err.message);
       }
     };

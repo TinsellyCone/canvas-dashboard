@@ -10,6 +10,7 @@ import {
   Group,
   Stack,
   ActionIcon,
+  MantineNumberSize,
 } from "@mantine/core";
 import Head from "next/head";
 import { useState } from "react";
@@ -47,101 +48,103 @@ export default function OnBoarding() {
     highestStepVisited >= step && active !== step;
 
   return (
-    <div style={{ padding: 24, height: "100%" }}>
+    <div style={{ padding: 24, height: '100%' }}>
       <Head>
         <title>Onboarding - {process.env.NEXT_PUBLIC_APP_NAME}</title>
       </Head>
       <Stepper
-        h={"100%"}
+        h={'100%'}
         p={24}
         active={active}
         onStepClick={setActive}
-        breakpoint="sm"
+        breakpoint='sm'
       >
         <Stepper.Step
-          label="Setup"
-          description="Find your Canvas account"
+          label='Setup'
+          description='Find your Canvas account'
           allowStepSelect={shouldAllowSelectStep(0)}
         >
           <Flex
-            direction={"column"}
-            justify={"center"}
-            align={"center"}
-            w={"100%"}
+            direction={'column'}
+            justify={'center'}
+            align={'center'}
+            w={'100%'}
             maw={350}
-            h={"100%"}
+            h={'100%'}
             gap={25}
-            style={{ margin: "0 auto", marginTop: 16 }}
+            style={{ margin: '0 auto', marginTop: 16 }}
           >
             <TextInput
-              placeholder="Token"
+              placeholder='Token'
               onChange={(event) => setToken(event.target.value)}
               value={token}
-              w={"100%"}
-              description="Generated in Canvas account settings"
-              label="Canvas Access Token"
-              radius={process.env.NEXT_PUBLIC_INPUT_RADIUS}
+              w={'100%'}
+              description='Generated in Canvas account settings'
+              label='Canvas Access Token'
+              radius={process.env.NEXT_PUBLIC_INPUT_RADIUS as MantineNumberSize}
             />
             <Button
-              variant="light"
+              variant='light'
               onClick={() => {
-                if (token != "") handleStepChange(active + 1);
+                if (token != '') handleStepChange(active + 1)
               }}
               fullWidth
-              radius={process.env.NEXT_PUBLIC_RADIUS}
+              radius={process.env.NEXT_PUBLIC_RADIUS as MantineNumberSize}
             >
               Contine
             </Button>
           </Flex>
         </Stepper.Step>
-        <Stepper.Step label="Profile" description="Nice to meet you">
+        <Stepper.Step label='Profile' description='Nice to meet you'>
           <Flex
-            direction={"column"}
-            justify={"center"}
-            align={"center"}
-            w={"100%"}
+            direction={'column'}
+            justify={'center'}
+            align={'center'}
+            w={'100%'}
             maw={350}
-            h={"100%"}
+            h={'100%'}
             gap={25}
-            style={{ margin: "0 auto", marginTop: 16 }}
+            style={{ margin: '0 auto', marginTop: 16 }}
           >
             <AvatarCard
               name={full_name}
               avatarURL={avatar_url}
               description={description}
-              color={"blue"}
+              color={'blue'}
             />
             <TextInput
               onChange={(event) => setName(event.target.value)}
-              placeholder="Type something..."
+              placeholder='Type something...'
               value={full_name}
-              w={"100%"}
-              description="Enter your full name"
-              label="Name"
-              radius={process.env.NEXT_PUBLIC_INPUT_RADIUS}
+              w={'100%'}
+              description='Enter your full name'
+              label='Name'
+              radius={process.env.NEXT_PUBLIC_INPUT_RADIUS as MantineNumberSize}
             />
             <TextInput
               onChange={(event) => setDescription(event.target.value)}
-              placeholder="Type something..."
+              placeholder='Type something...'
               value={description}
-              w={"100%"}
-              description="Keep it short and sweet"
-              label="Description"
-              radius={process.env.NEXT_PUBLIC_INPUT_RADIUS}
+              w={'100%'}
+              description='Keep it short and sweet'
+              label='Description'
+              radius={process.env.NEXT_PUBLIC_INPUT_RADIUS as MantineNumberSize}
             />
             <Input.Wrapper
-              w={"100%"}
+              w={'100%'}
               description="By default, this won't be displayed"
-              label="Phone Number"
+              label='Phone Number'
             >
               <Input
                 component={InputMask}
-                mask="+1 (999) 999-9999"
-                maskChar="   "
+                mask='+1 (999) 999-9999'
+                maskChar='   '
                 onChange={(event) => setNumber(event.target.value)}
-                placeholder="+1 (123) 456-7890"
+                placeholder='+1 (123) 456-7890'
                 value={phone_number}
-                radius={process.env.NEXT_PUBLIC_INPUT_RADIUS}
+                radius={
+                  process.env.NEXT_PUBLIC_INPUT_RADIUS as MantineNumberSize
+                }
               />
             </Input.Wrapper>
             {/* <TextInput
@@ -152,54 +155,54 @@ export default function OnBoarding() {
               description="By default, this won't be displayed"
               label="Phone Number"
             /> */}
-            <Group w={"100%"} noWrap spacing={'xs'}>
+            <Group w={'100%'} noWrap spacing={'xs'}>
               <ActionIcon
                 onClick={() => handleStepChange(active - 1)}
-                variant="light"
-                size={"lg"}
-                radius={process.env.NEXT_PUBLIC_RADIUS}
+                variant='light'
+                size={'lg'}
+                radius={process.env.NEXT_PUBLIC_RADIUS as MantineNumberSize}
               >
                 <IconArrowLeft size={18} />
               </ActionIcon>
               <Button
-                variant="light"
+                variant='light'
                 onClick={() => {
-                  if (full_name != "" && phone_number != "")
-                    handleStepChange(active + 1);
+                  if (full_name != '' && phone_number != '')
+                    handleStepChange(active + 1)
                 }}
                 fullWidth
-                radius={process.env.NEXT_PUBLIC_RADIUS}
+                radius={process.env.NEXT_PUBLIC_RADIUS as MantineNumberSize}
               >
                 Contine
               </Button>
             </Group>
           </Flex>
         </Stepper.Step>
-        <Stepper.Step label="Preferences" description="Customize everything">
+        <Stepper.Step label='Preferences' description='Customize everything'>
           <Flex
-            direction={"column"}
-            justify={"center"}
-            align={"center"}
-            w={"100%"}
+            direction={'column'}
+            justify={'center'}
+            align={'center'}
+            w={'100%'}
             maw={350}
-            h={"100%"}
+            h={'100%'}
             gap={25}
-            style={{ margin: "0 auto", marginTop: 16 }}
+            style={{ margin: '0 auto', marginTop: 16 }}
           >
-            <Group w={"100%"} noWrap spacing={'xs'}>
+            <Group w={'100%'} noWrap spacing={'xs'}>
               <ActionIcon
                 onClick={() => handleStepChange(active - 1)}
-                variant="light"
-                size={"lg"}
-                radius={process.env.NEXT_PUBLIC_RADIUS}
+                variant='light'
+                size={'lg'}
+                radius={process.env.NEXT_PUBLIC_RADIUS as MantineNumberSize}
               >
                 <IconArrowLeft size={18} />
               </ActionIcon>
               <Button
-                variant="light"
+                variant='light'
                 onClick={() => handleStepChange(active + 1)}
                 fullWidth
-                radius={process.env.NEXT_PUBLIC_RADIUS}
+                radius={process.env.NEXT_PUBLIC_RADIUS as MantineNumberSize}
               >
                 Contine
               </Button>
@@ -208,26 +211,26 @@ export default function OnBoarding() {
         </Stepper.Step>
         <Stepper.Completed>
           <Flex
-            direction={"column"}
-            justify={"center"}
-            align={"center"}
-            w={"100%"}
+            direction={'column'}
+            justify={'center'}
+            align={'center'}
+            w={'100%'}
             maw={350}
-            h={"100%"}
+            h={'100%'}
             gap={20}
-            style={{ margin: "0 auto", marginTop: 16 }}
+            style={{ margin: '0 auto', marginTop: 16 }}
           >
             <Text fz={35} fw={700}>
               Summary
             </Text>
-            <Divider w={"100%"} my={10} />
+            <Divider w={'100%'} my={10} />
             <AvatarCard
               name={full_name}
               description={description}
               avatarURL={avatar_url}
-              color={"blue"}
+              color={'blue'}
             />
-            <Stack spacing={3} w={"100%"}>
+            <Stack spacing={3} w={'100%'}>
               <Group spacing={0}>
                 <Text fw={700}>Phone Number: &nbsp;</Text>
                 <Text>{phone_number}</Text>
@@ -236,25 +239,25 @@ export default function OnBoarding() {
                 <Text fw={700}>Token: &nbsp;</Text>
                 <Code>
                   {token.slice(0, 35)}
-                  {token.length > 35 ? "..." : null}
+                  {token.length > 35 ? '...' : null}
                 </Code>
               </Group>
             </Stack>
-            <Group w={"100%"} noWrap spacing={'xs'}>
+            <Group w={'100%'} noWrap spacing={'xs'}>
               <ActionIcon
                 onClick={() => handleStepChange(active - 1)}
-                variant="light"
-                size={"lg"}
-                radius={process.env.NEXT_PUBLIC_RADIUS}
+                variant='light'
+                size={'lg'}
+                radius={process.env.NEXT_PUBLIC_RADIUS as MantineNumberSize}
               >
                 <IconArrowLeft size={18} />
               </ActionIcon>
               <Button
                 disabled={loading}
-                variant="light"
+                variant='light'
                 fullWidth
                 onClick={() => submit()}
-                radius={process.env.NEXT_PUBLIC_RADIUS}
+                radius={process.env.NEXT_PUBLIC_RADIUS as MantineNumberSize}
               >
                 Looks good!
               </Button>
@@ -263,7 +266,7 @@ export default function OnBoarding() {
         </Stepper.Completed>
       </Stepper>
     </div>
-  );
+  )
   async function submit() {
 
     setLoading(true);

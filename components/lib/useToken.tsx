@@ -1,10 +1,11 @@
 import { useSession, useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { PostgrestError } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
 export default function useToken(): { token: string | null, loading: boolean, error: any } {
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<PostgrestError | undefined>(undefined);
 
   const session = useSession();
   const supabase = useSupabaseClient();
@@ -24,11 +25,11 @@ export default function useToken(): { token: string | null, loading: boolean, er
         if (error) setError(error)
         if (data) {
           setToken(data.token)
-          setError(null)
+          setError(undefined)
         }
         setLoading(false)
       }
-      catch(err) {
+      catch(err: any) {
         alert(err.message)
       }
     }

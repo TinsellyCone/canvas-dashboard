@@ -1,10 +1,11 @@
 import { useSession, useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { PostgrestError } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
 export default function useAvatar() {
   const [avatarURL, setAvatarURL] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<PostgrestError | undefined>(undefined);
 
   const session = useSession();
   const supabase = useSupabaseClient();
@@ -24,11 +25,11 @@ export default function useAvatar() {
         if (error) setError(error)
         if (data) {
           setAvatarURL(data.avatar_url)
-          setError(null)
+          setError(undefined)
         }
         setLoading(false)
       }
-      catch(err) {
+      catch(err: any) {
         alert(err.message)
       }
     }
