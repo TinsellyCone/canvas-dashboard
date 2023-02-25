@@ -4,17 +4,15 @@ import {
   Group,
   Text,
   useMantineTheme,
-  Flex,
   Card,
   Table,
   MantineNumberSize,
-  Image,
   ActionIcon,
 } from '@mantine/core'
 import { IconUpload, IconFileUpload, IconX } from '@tabler/icons'
 import { openConfirmModal } from '@mantine/modals'
 import { updateNotification, showNotification } from '@mantine/notifications'
-import { Dropzone, DropzoneProps, FileWithPath } from '@mantine/dropzone'
+import { Dropzone, FileWithPath } from '@mantine/dropzone'
 import { IconCheck, IconFile } from '@tabler/icons-react'
 import { NextRouter } from 'next/router'
 

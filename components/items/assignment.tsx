@@ -1,10 +1,9 @@
 import useSWR from 'swr'
 import { useRouter } from 'next/router';
 import useToken from 'components/lib/useToken';
-import { LoadingOverlay, Button, Text } from '@mantine/core';
+import { LoadingOverlay, } from '@mantine/core';
 import TextEditor from 'components/submissions/richText'
 import { FileUpload } from 'components/submissions/fileUpload';
-import { useState } from 'react';
 
 export default function Assignment({ content_id }: {content_id: string}) {
   const { token } = useToken()

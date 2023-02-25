@@ -1,5 +1,4 @@
 import useSWR from 'swr'
-import { LoadingOverlay, Skeleton } from '@mantine/core'
 import ClassCard from 'components/dashboard/classCard'
 import SkeletonCard from 'components/dashboard/skeletonCard'
 import useToken from 'components/lib/useToken'

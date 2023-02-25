@@ -1,24 +1,15 @@
 import {
   Button,
-  Badge,
-  Text,
   Card,
   Image,
   Group,
   Stack,
   Divider,
   ActionIcon,
-  Modal,
-  ColorInput,
-  NumberInput,
   Skeleton,
   MantineNumberSize,
 } from "@mantine/core";
-import { IconNotebook, IconDotsVertical, IconCheck } from "@tabler/icons";
-import Link from "next/link";
-import { useState } from "react";
-import useSWR from "swr";
-import useToken from "components/lib/useToken";
+import { IconDotsVertical } from "@tabler/icons";
 
 export default function SkeletonCard(props) {
   // imagePath, className, grade, active
