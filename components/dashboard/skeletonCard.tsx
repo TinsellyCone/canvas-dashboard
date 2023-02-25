@@ -12,6 +12,7 @@ import {
   ColorInput,
   NumberInput,
   Skeleton,
+  MantineNumberSize,
 } from "@mantine/core";
 import { IconNotebook, IconDotsVertical, IconCheck } from "@tabler/icons";
 import Link from "next/link";
@@ -50,14 +51,14 @@ export default function SkeletonCard(props) {
           variant="light"
           color={props.color}
           style={{ flex: 1 }}
-          radius={process.env.NEXT_PUBLIC_RADIUS}
+          radius={process.env.NEXT_PUBLIC_RADIUS as MantineNumberSize}
         >
           View
         </Button>
         <ActionIcon
           size={36}
           variant="light"
-          radius={process.env.NEXT_PUBLIC_RADIUS}
+          radius={process.env.NEXT_PUBLIC_RADIUS as MantineNumberSize}
         >
           <IconDotsVertical size={20} />
         </ActionIcon>
