@@ -3,6 +3,8 @@ import { LoadingOverlay, Skeleton } from '@mantine/core'
 import ClassCard from 'components/dashboard/classCard'
 import SkeletonCard from 'components/dashboard/skeletonCard'
 import useToken from 'components/lib/useToken'
+import { updateNotification } from "@mantine/notifications";
+import { IconCheck } from "@tabler/icons-react"
 
 export default function Dashboard() {
   const { token } = useToken();
@@ -13,6 +15,16 @@ export default function Dashboard() {
       '&enrollment_state=active&per_page=15&include[]=course_image',
     fetcher
   )
+
+  if(token != null) updateNotification({
+    id: "creating-account",
+    color: "teal",
+    title: "Account creation complete!",
+    message:
+      "Welcome to " + process.env.NEXT_PUBLIC_APP_NAME,
+    icon: <IconCheck size={16} />,
+    autoClose: 2000,
+  });
 
   if (token != null) return (
     <div
@@ -28,6 +40,11 @@ export default function Dashboard() {
     >
       {isLoading ? (
         <>
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
           <SkeletonCard />
           <SkeletonCard />
           <SkeletonCard />

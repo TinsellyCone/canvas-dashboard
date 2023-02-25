@@ -37,19 +37,17 @@ export default function SkeletonCard(props) {
 
       <Stack spacing={"xs"}>
         <Group position="left" spacing={"xs"}>
-          <Skeleton w={20} h={20} />
+          <Skeleton visible w={20} h={20} />
           <Skeleton visible h={15} w={75} />
         </Group>
-        <Group position="left" spacing={"xs"}>
-          <Skeleton w={20} h={20} />
+        <Group position="left" spacing={"xs"} mb={2}>
+          <Skeleton visible w={20} h={20} />
           <Skeleton visible h={15} w={75} />
         </Group>
       </Stack>
       <Group position="center" mt={"md"} spacing={"xs"}>
         <Button
           variant="light"
-          component={Link}
-          href={"/class/" + props.id}
           color={props.color}
           style={{ flex: 1 }}
           radius={process.env.NEXT_PUBLIC_RADIUS}
@@ -59,7 +57,6 @@ export default function SkeletonCard(props) {
         <ActionIcon
           size={36}
           variant="light"
-          onClick={() => setOpened(true)}
           radius={process.env.NEXT_PUBLIC_RADIUS}
         >
           <IconDotsVertical size={20} />

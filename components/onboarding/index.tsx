@@ -18,6 +18,7 @@ import AvatarCard from 'components/avatarCard'
 import { IconArrowLeft } from "@tabler/icons-react";
 import { useUser } from "@supabase/auth-helpers-react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { showNotification } from "@mantine/notifications";
 
 export default function OnBoarding() {
   const [avatar_url, setAvatar] = useState("");
@@ -266,6 +267,15 @@ export default function OnBoarding() {
   async function submit() {
 
     setLoading(true);
+
+    showNotification({
+      id: "creating-account",
+      loading: true,
+      title: "Account is being created",
+      message: "This may take a few seconds",
+      autoClose: false,
+      disallowClose: true,
+    });
 
     for (let i = 0; user != null && i < 1; i++) {
       const { data, error } = await supabase

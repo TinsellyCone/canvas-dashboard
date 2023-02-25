@@ -43,7 +43,7 @@ export default function Titlebar({ title, options, backURL }) {
       ) : (
         <Title order={2}>{title}</Title>
       )}
-      <Menu position="bottom-end" transition="pop-top-right">
+      {options != null ? <Menu position="bottom-end" transition="pop-top-right">
         <Menu.Target>
           <ActionIcon
             size={"lg"}
@@ -61,7 +61,7 @@ export default function Titlebar({ title, options, backURL }) {
               colorScheme == "light" ? (
                 <IconCheck size={14} />
               ) : (
-                <div style={{ width: 14 }}></div>
+                null
               )
             }
             onClick={
@@ -77,7 +77,7 @@ export default function Titlebar({ title, options, backURL }) {
           <Menu.Item
             icon={
               colorScheme == "light" ? (
-                <div style={{ width: 14 }}></div>
+                null
               ) : (
                 <IconCheck size={14} />
               )
@@ -93,7 +93,7 @@ export default function Titlebar({ title, options, backURL }) {
             Dark Mode
           </Menu.Item>
         </Menu.Dropdown>
-      </Menu>
+      </Menu> : null}
     </Group>
   );
 }
