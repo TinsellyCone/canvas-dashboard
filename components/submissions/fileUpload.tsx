@@ -45,7 +45,7 @@ export function FileUpload({
           <tbody>
             {files.map((file, index) => {
               return (
-                <tr>
+                <tr key={file.name}>
                   <td>
                     <Group position={'apart'}>
                       <Group spacing={'sm'}>
