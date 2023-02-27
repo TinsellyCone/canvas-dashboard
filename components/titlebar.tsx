@@ -3,13 +3,10 @@ import {
   ActionIcon,
   Menu,
   Title,
-  Stack,
-  Anchor,
   MantineNumberSize,
   useMantineColorScheme,
 } from '@mantine/core'
 import { IconDotsVertical, IconCheck } from '@tabler/icons'
-import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { IconArrowLeft } from '@tabler/icons-react'
 import Link from 'next/link'

@@ -1,19 +1,19 @@
-import { RichTextEditor, Link } from "@mantine/tiptap";
-import { useEditor } from "@tiptap/react";
-import Highlight from "@tiptap/extension-highlight";
-import StarterKit from "@tiptap/starter-kit";
-import Underline from "@tiptap/extension-underline";
-import TextAlign from "@tiptap/extension-text-align";
-import Superscript from "@tiptap/extension-superscript";
-import SubScript from "@tiptap/extension-subscript";
-import Typography from "@tiptap/extension-typography"
+import { RichTextEditor, Link } from '@mantine/tiptap'
+import { useEditor } from '@tiptap/react'
+import Highlight from '@tiptap/extension-highlight'
+import StarterKit from '@tiptap/starter-kit'
+import Underline from '@tiptap/extension-underline'
+import TextAlign from '@tiptap/extension-text-align'
+import Superscript from '@tiptap/extension-superscript'
+import SubScript from '@tiptap/extension-subscript'
+import Typography from '@tiptap/extension-typography'
 
-import { Button, MantineNumberSize, Text } from "@mantine/core";
-import { useState } from "react";
-import { openConfirmModal } from "@mantine/modals";
-import { updateNotification, showNotification } from "@mantine/notifications";
-import { IconCheck } from "@tabler/icons-react";
-import { NextRouter } from "next/router";
+import { Button, MantineNumberSize, Text } from '@mantine/core'
+import { useState } from 'react'
+import { openConfirmModal } from '@mantine/modals'
+import { updateNotification, showNotification } from '@mantine/notifications'
+import { IconCheck, IconX } from '@tabler/icons-react'
+import { NextRouter } from 'next/router'
 
 export default function TextEditor({
   content_id,
@@ -143,14 +143,25 @@ export default function TextEditor({
         }),
       }
     )
-    updateNotification({
-      id: 'submitting',
-      color: 'teal',
-      title: 'Submission completed',
-      message: 'Your submission was successfully submitted!',
-      icon: <IconCheck size={16} />,
-      autoClose: 5000,
-    })
+    if (response.statusText == 'Bad Request') {
+      updateNotification({
+        id: 'submitting',
+        color: 'red',
+        title: 'Something went wrong!',
+        message: 'Error: ' + response.statusText,
+        icon: <IconX size={16} />,
+        autoClose: 15000,
+      })
+    } else {
+      updateNotification({
+        id: 'submitting',
+        color: 'teal',
+        title: 'Submission completed',
+        message: 'Your submission was successfully submitted!',
+        icon: <IconCheck size={16} />,
+        autoClose: 5000,
+      })
+    }
     setSubmitting(false)
     setTextContent('<p></p>')
   }

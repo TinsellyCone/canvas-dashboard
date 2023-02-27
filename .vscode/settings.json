@@ -8,5 +8,9 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
-  "editor.formatOnType": true
+  "editor.formatOnType": true,
+  "workbench.preferredDarkColorTheme": "Bluloco Dark",
+  "workbench.colorTheme": "Bluloco Dark",
+  "workbench.preferredLightColorTheme": "Bluloco Light",
+  "window.autoDetectColorScheme": true
 }

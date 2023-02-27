@@ -4,17 +4,15 @@ import {
   Group,
   Text,
   useMantineTheme,
-  Flex,
   Card,
   Table,
   MantineNumberSize,
-  Image,
   ActionIcon,
 } from '@mantine/core'
 import { IconUpload, IconFileUpload, IconX } from '@tabler/icons'
 import { openConfirmModal } from '@mantine/modals'
 import { updateNotification, showNotification } from '@mantine/notifications'
-import { Dropzone, DropzoneProps, FileWithPath } from '@mantine/dropzone'
+import { Dropzone, FileWithPath } from '@mantine/dropzone'
 import { IconCheck, IconFile } from '@tabler/icons-react'
 import { NextRouter } from 'next/router'
 
@@ -39,7 +37,7 @@ export function FileUpload({
         w={'calc(50% - 6px)'}
         shadow={'sm'}
         h={256}
-        style={{ overflow: 'scroll' }}
+        style={{ overflow: 'scroll', transition: 'opacity 0.25s ease-in-out,' }}
       >
         <Table>
           <tbody>
@@ -73,7 +71,7 @@ export function FileUpload({
         </Table>
       </Card>
       <Dropzone
-        onDrop={setFiles}
+        onDrop={fileDrop}
         onReject={(files) => console.log('rejected files', files)}
         maxSize={3 * 1024 ** 2}
         pos={'absolute'}
@@ -145,6 +143,9 @@ export function FileUpload({
       </Button>
     </div>
   )
+  function fileDrop(prop: FileWithPath[] | FileWithPath) {
+    setFiles(files.concat(prop))
+  }
   async function submitFile() {
     console.log('Submitting: ' + files)
     setSubmitting(true)
@@ -182,16 +183,28 @@ export function FileUpload({
         }),
       }
     )
-    updateNotification({
-      id: 'submitting',
-      color: 'teal',
-      title: 'Submission completed',
-      message: 'Your submission was successfully submitted!',
-      icon: <IconCheck size={16} />,
-      autoClose: 5000,
-    })
+    if (response.statusText == 'Bad Request') {
+      updateNotification({
+        id: 'submitting',
+        color: 'red',
+        title: 'Something went wrong!',
+        message: 'Error: ' + response.statusText,
+        icon: <IconX size={16} />,
+        autoClose: 15000,
+      })
+    } else {
+      updateNotification({
+        id: 'submitting',
+        color: 'teal',
+        title: 'Submission completed',
+        message: 'Your submission was successfully submitted!',
+        icon: <IconCheck size={16} />,
+        autoClose: 5000,
+      })
+    }
     setSubmitting(false)
     setFiles([])
+    console.log(response)
     // URL.revokeObjectURL(files[0])
   }
 }
