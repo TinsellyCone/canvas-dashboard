@@ -15,7 +15,7 @@ export default function Index() {
   return (
     <>
       <Titlebar title={'Assignments'} backURL={'/' as unknown as URL} />
-      <Assignments courseID={router.query.className} />
+      <Assignments courseID={router.query.className as string} />
     </>
   )
 }
