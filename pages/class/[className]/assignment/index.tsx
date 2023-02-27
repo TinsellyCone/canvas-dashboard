@@ -1,5 +1,5 @@
 import Titlebar from 'components/titlebar'
-import Modules from '@/components/modules/index'
+import Assignments from '@/components/assignments/main'
 import { useRouter } from 'next/router'
 import LogIn from 'components/logIn'
 import { useSession } from '@supabase/auth-helpers-react'
@@ -14,11 +14,8 @@ export default function Index() {
 
   return (
     <>
-      <Titlebar
-        title={'Modules'}
-        backURL={'/' as unknown as URL}
-      />
-      <Modules courseID={router.query.className} />
+      <Titlebar title={'Assignments'} backURL={'/' as unknown as URL} />
+      <Assignments courseID={router.query.className} />
     </>
   )
 }
