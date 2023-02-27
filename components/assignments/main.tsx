@@ -10,6 +10,7 @@ export default function Assignments({
   courseID: string
 }): JSX.Element {
   const { token } = useToken()
+  // @ts-ignore
   const fetcher = (...args) => fetch(...args).then((res) => res.json())
   const { data, error, isLoading } = useSWR(
     '/canvas/courses/' +
@@ -29,6 +30,7 @@ export default function Assignments({
         p={24}
         pt={0}
         multiple
+        defaultValue={['All Assignments']}
       >
         {isLoading ? (
           <LoadingOverlay visible={false} />
