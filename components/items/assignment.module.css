@@ -1,0 +1,9 @@
+.assignment * {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+.assignment {
+  width: 100% !important;
+  overflow-x: scroll;
+}

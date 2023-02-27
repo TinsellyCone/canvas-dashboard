@@ -8,6 +8,7 @@ import DataStack from './dataStack';
 import { useState } from 'react';
 import { IconExternalLink, IconForms, IconUpload } from '@tabler/icons-react';
 import Link from 'next/link';
+import style from './assignment.module.css'
 
 export default function Assignment({ content_id }: {content_id: string}) {
   const { token } = useToken()
@@ -47,7 +48,10 @@ export default function Assignment({ content_id }: {content_id: string}) {
         </Flex>
       </Card>
       {/* <Button onClick={() => setSubmissionType('online_text_entry')} opacity={submissionType != undefined ? 0 : 1} style={{position:'fixed', bottom: 24, zIndex: 99}} variant={'filled'} w={'calc(100% - 106px)'}>Submit Assignment</Button> */}
-      <div dangerouslySetInnerHTML={{ __html: data.description }} />
+      <div
+        className={style.assignment}
+        dangerouslySetInnerHTML={{ __html: data.description }}
+      />
       <Group my={24}>
         {checkSubmissionType(data, 'online_text_entry') ? (
           <ActionIcon
@@ -76,9 +80,7 @@ export default function Assignment({ content_id }: {content_id: string}) {
             variant={'light'}
             onClick={() =>
               setSubmissionType(
-                submissionType == 'online_upload'
-                  ? undefined
-                  : 'online_upload'
+                submissionType == 'online_upload' ? undefined : 'online_upload'
               )
             }
           >
