@@ -1,25 +1,25 @@
-.assignment * {
+.page * {
   max-width: 100% !important;
 }
 
-.assignment {
+.page {
   width: 100% !important;
   overflow-x: scroll;
 }
 
-.assignment img {
+.page img {
   border-radius: 10px;
 }
 
-.assignment a {
+.page a {
   color: #4dabf7; /* #228be6 */
   text-decoration: none;
 }
-.assignment a:hover {
+.page a:hover {
   text-decoration: underline;
 }
 
-.assignment iframe {
+.page iframe {
   border: 0 !important;
   outline: 0 !important;
   width: 100%;
