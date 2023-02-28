@@ -26,11 +26,11 @@ export default function URLSubmission({
           w={550}
           placeholder={'https://'}
           label={'URL Submission'}
-          description={'Type or past a URL here to submit it'}
+          description={'Type or paste a URL here'}
         />
         <Button
           onClick={submitURL}
-          disabled={submitting}
+          disabled={submitting || !(textContent.startsWith('http://') || textContent.startsWith('https://')) }
           radius={process.env.NEXT_PUBLIC_RADIUS as MantineNumberSize}
           mt={24}
           w={550}
