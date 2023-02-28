@@ -88,6 +88,7 @@ export default function Discussion({ content_id }: { content_id: string }) {
               {fullData.view.map((comment: any, index: number) => {
                 return (
                   <CommentHtml
+                    key={index}
                     // @ts-ignore
                     author={users[index + 1]}
                     body={comment.message}
