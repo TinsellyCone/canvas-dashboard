@@ -7,6 +7,7 @@ import { useSession } from '@supabase/auth-helpers-react'
 import useToken from 'components/lib/useToken'
 import useSWR from 'swr'
 import { LoadingOverlay } from '@mantine/core'
+import Discussion from '@/components/items/discussion'
 
 export default function Index() {
   const router = useRouter()
@@ -52,6 +53,16 @@ export default function Index() {
           backURL={('/class/' + router.query.className) as unknown as URL}
         />
         <Page page_url={data.page_url} />
+      </>
+    )
+  } else if (data.type == 'Discussion') {
+    return (
+      <>
+        <Titlebar
+          title={data.title}
+          backURL={('/class/' + router.query.className) as unknown as URL}
+        />
+        <Discussion content_id={data.content_id} />
       </>
     )
   }
