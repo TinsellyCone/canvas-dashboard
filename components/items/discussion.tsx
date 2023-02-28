@@ -65,51 +65,53 @@ export default function Discussion({ content_id }: { content_id: string }) {
   }
   if (!isLoading) {
     return (
-      <Card withBorder radius={'md'} shadow={'lg'} p={32} m={'0 auto'} w={750}>
-        <Stack mb={32}>
-          <Title order={2}>{data.title}</Title>
-        </Stack>
-        <Text dangerouslySetInnerHTML={{ __html: data.message }} />
-        <Textarea
-          value={textContent}
-          onChange={(event) => setTextContent(event.target.value)}
-          placeholder='Type something...'
-          mb={12}
-        />
-        <Button disabled={submitting || textContent == ''} onClick={submitText} variant='light' fullWidth>
-          Post Reply
-        </Button>
-        {fullData != undefined &&
-        fullData.view != undefined &&
-        fullData.participants != undefined ? (
-          <>
-            <Divider my={32} />
-            <Stack spacing={'sm'}>
-              {fullData.view.map((comment: any, index: number) => {
-                return (
-                  <CommentHtml
-                    key={index}
-                    // @ts-ignore
-                    author={users[index + 1]}
-                    body={comment.message}
-                    postedAt={
-                      new Date(comment.updated_at).toLocaleString('en-us', {
-                        timeZone: 'EST',
-                        day: '2-digit',
-                        month: 'short',
-                        hour: 'numeric',
-                        minute: 'numeric',
-                      }) || 'N/A'
-                    }
-                  />
-                )
-              })}
-            </Stack>
-          </>
-        ) : (
-          <></>
-        )}
-      </Card>
+      <div style={{height: '100%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', paddingBottom: '24px'}}>
+        <Card withBorder radius={'md'} shadow={'lg'} p={32} mb={48} maw={750} w={'100%'}>
+          <Stack mb={32}>
+            <Title order={2}>{data.title}</Title>
+          </Stack>
+          <Text dangerouslySetInnerHTML={{ __html: data.message }} />
+          <Textarea
+            value={textContent}
+            onChange={(event) => setTextContent(event.target.value)}
+            placeholder='Type something...'
+            mb={12}
+          />
+          <Button disabled={submitting || textContent == ''} onClick={submitText} variant='light' fullWidth>
+            Post Reply
+          </Button>
+          {fullData != undefined &&
+          fullData.view != undefined &&
+          fullData.participants != undefined ? (
+            <>
+              <Divider my={32} />
+              <Stack spacing={'sm'}>
+                {fullData.view.map((comment: any, index: number) => {
+                  return (
+                    <CommentHtml
+                      key={index}
+                      // @ts-ignore
+                      author={users[index + 1]}
+                      body={comment.message}
+                      postedAt={
+                        new Date(comment.updated_at).toLocaleString('en-us', {
+                          timeZone: 'EST',
+                          day: '2-digit',
+                          month: 'short',
+                          hour: 'numeric',
+                          minute: 'numeric',
+                        }) || 'N/A'
+                      }
+                    />
+                  )
+                })}
+              </Stack>
+            </>
+          ) : (
+            <></>
+          )}
+        </Card>
+      </div>
       // <div style={{ marginLeft: 24, marginRight: 24, marginBottom: 24 }}>
       //   <div
       //     dangerouslySetInnerHTML={{ __html: data.message }}
