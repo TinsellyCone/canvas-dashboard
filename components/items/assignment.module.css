@@ -1,0 +1,27 @@
+.assignment * {
+  max-width: 100% !important;
+}
+
+.assignment {
+  width: 100% !important;
+  /* overflow-x: scroll; */
+}
+
+.assignment img {
+  border-radius: 10px;
+}
+
+.assignment a {
+  color: #4dabf7; /* #228be6 */
+  text-decoration: none;
+}
+.assignment a:hover {
+  text-decoration: underline;
+}
+
+.assignment iframe {
+  border: 0 !important;
+  outline: 0 !important;
+  width: 100%;
+  border-radius: 10px;
+}

@@ -1,0 +1,27 @@
+.page * {
+  max-width: 100% !important;
+}
+
+.page {
+  width: 100% !important;
+  /* overflow-x: scroll; */
+}
+
+.page img {
+  border-radius: 10px;
+}
+
+.page a {
+  color: #4dabf7; /* #228be6 */
+  text-decoration: none;
+}
+.page a:hover {
+  text-decoration: underline;
+}
+
+.page iframe {
+  border: 0 !important;
+  outline: 0 !important;
+  width: 100%;
+  border-radius: 10px;
+}

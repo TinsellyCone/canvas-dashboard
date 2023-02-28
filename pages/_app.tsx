@@ -26,17 +26,17 @@ export default function App({ Component, pageProps }: AppProps) {
     >
       <Head>
         <meta
-          name="viewport"
-          content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"
+          name='viewport'
+          content='width=device-width; initial-scale=1.0;' // maximum-scale=1.0; user-scalable=0;
         />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name='apple-mobile-web-app-capable' content='yes' />
         <meta
-          name="apple-mobile-web-app-status-bar-style"
-          content="black-translucent"
+          name='apple-mobile-web-app-status-bar-style'
+          content='black-translucent'
         />
         <link
-          rel="apple-touch-icon-precomposed"
-          href="/Icons/Apple Touch Icon.png"
+          rel='apple-touch-icon-precomposed'
+          href='/Icons/Apple Touch Icon.png'
         />
       </Head>
       <ColorSchemeProvider
@@ -50,9 +50,9 @@ export default function App({ Component, pageProps }: AppProps) {
         >
           <NotificationsProvider limit={5}>
             <ModalsProvider>
-              <Flex direction="row" style={{ maxWidth: "100vw" }}>
+              <Flex direction='row' style={{ maxWidth: '100vw' }}>
                 <Navbar />
-                <div style={{ width: "100%", overflow: "hidden" }}>
+                <div style={{ width: '100%', overflow: 'hidden' }}>
                   <Component {...pageProps} />
                   <Analytics />
                 </div>
@@ -62,5 +62,5 @@ export default function App({ Component, pageProps }: AppProps) {
         </MantineProvider>
       </ColorSchemeProvider>
     </SessionContextProvider>
-  );
+  )
 }

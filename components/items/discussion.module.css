@@ -1,0 +1,27 @@
+.discussion * {
+  max-width: 100% !important;
+}
+
+.discussion {
+  width: 100% !important;
+  /* overflow-x: scroll; */
+}
+
+.discussion img {
+  border-radius: 10px;
+}
+
+.discussion a {
+  color: #4dabf7; /* #228be6 */
+  text-decoration: none;
+}
+.discussion a:hover {
+  text-decoration: underline;
+}
+
+.discussion iframe {
+  border: 0 !important;
+  outline: 0 !important;
+  width: 100%;
+  border-radius: 10px;
+}

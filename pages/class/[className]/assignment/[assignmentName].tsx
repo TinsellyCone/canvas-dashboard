@@ -7,7 +7,6 @@ import { useSession } from '@supabase/auth-helpers-react'
 import useToken from 'components/lib/useToken'
 import useSWR from 'swr'
 import { LoadingOverlay } from '@mantine/core'
-import Discussion from '@/components/items/discussion'
 
 export default function Index() {
   const router = useRouter()
@@ -17,10 +16,8 @@ export default function Index() {
   const { data, error, isLoading } = useSWR(
     '/canvas/courses/' +
       router.query.className +
-      '/modules/' +
-      router.query.moduleName +
-      '/items/' +
-      router.query.itemName +
+      '/assignments/' +
+      router.query.assignmentName +
       '?access_token=' +
       token,
     fetcher
@@ -35,35 +32,13 @@ export default function Index() {
     return <LoadingOverlay visible />
   }
 
-  if (data.type == 'Assignment') {
     return (
       <>
         <Titlebar
-          title={data.title}
-          backURL={('/class/' + router.query.className) as unknown as URL}
+          title={data.name}
+          backURL={('/class/' + router.query.className + '/assignment') as unknown as URL}
         />
-        <Assignment content_id={data.content_id} />
+        <Assignment content_id={data.id} />
       </>
     )
-  } else if (data.type == 'Page') {
-    return (
-      <>
-        <Titlebar
-          title={data.title}
-          backURL={('/class/' + router.query.className) as unknown as URL}
-        />
-        <Page page_url={data.page_url} />
-      </>
-    )
-  } else if (data.type == 'Discussion') {
-    return (
-      <>
-        <Titlebar
-          title={data.title}
-          backURL={('/class/' + router.query.className) as unknown as URL}
-        />
-        <Discussion content_id={data.content_id} />
-      </>
-    )
-  }
 }

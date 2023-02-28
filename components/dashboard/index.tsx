@@ -7,6 +7,7 @@ import { IconCheck } from "@tabler/icons-react"
 
 export default function Dashboard(): JSX.Element {
   const { token } = useToken();
+  // @ts-ignore
   const fetcher = (...args) => fetch(...args).then((res) => res.json())
   const { data, error, isLoading } = useSWR(
     '/canvas/courses.json?access_token=' +
@@ -49,7 +50,7 @@ export default function Dashboard(): JSX.Element {
           <SkeletonCard />
         </>
       ) : (
-        data.map((currentClass) => {
+        data.map((currentClass: {name: string, image_download_url: string, id: string}) => {
           return (
             <ClassCard
               className={currentClass.name}

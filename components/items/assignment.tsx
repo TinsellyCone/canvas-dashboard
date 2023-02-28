@@ -1,13 +1,15 @@
 import useSWR from 'swr'
 import { useRouter } from 'next/router';
 import useToken from 'components/lib/useToken';
-import { LoadingOverlay, Card, Group, Flex, Button, ActionIcon, Collapse } from '@mantine/core';
+import { LoadingOverlay, Card, Group, Flex, Button, ActionIcon, Collapse, Anchor } from '@mantine/core';
 import TextEditor from 'components/submissions/richText'
 import { FileUpload } from 'components/submissions/fileUpload';
 import DataStack from './dataStack';
 import { useState } from 'react';
-import { IconExternalLink, IconForms, IconUpload } from '@tabler/icons-react';
+import { IconExternalLink, IconForms, IconLink, IconUpload } from '@tabler/icons-react';
 import Link from 'next/link';
+import style from './assignment.module.css'
+import URLSubmission from '../submissions/url';
 
 export default function Assignment({ content_id }: {content_id: string}) {
   const { token } = useToken()
@@ -46,8 +48,10 @@ export default function Assignment({ content_id }: {content_id: string}) {
           />
         </Flex>
       </Card>
-      {/* <Button onClick={() => setSubmissionType('online_text_entry')} opacity={submissionType != undefined ? 0 : 1} style={{position:'fixed', bottom: 24, zIndex: 99}} variant={'filled'} w={'calc(100% - 106px)'}>Submit Assignment</Button> */}
-      <div dangerouslySetInnerHTML={{ __html: data.description }} />
+      <div
+        className={style.assignment}
+        dangerouslySetInnerHTML={{ __html: data.description }}
+      />
       <Group my={24}>
         {checkSubmissionType(data, 'online_text_entry') ? (
           <ActionIcon
@@ -67,6 +71,22 @@ export default function Assignment({ content_id }: {content_id: string}) {
             <IconForms size={30} />
           </ActionIcon>
         ) : null}
+        {checkSubmissionType(data, 'online_url') ? (
+          <ActionIcon
+            radius={'md'}
+            color={'blue'}
+            w={70}
+            h={70}
+            variant={'light'}
+            onClick={() =>
+              setSubmissionType(
+                submissionType == 'online_url' ? undefined : 'online_url'
+              )
+            }
+          >
+            <IconLink size={30} />
+          </ActionIcon>
+        ) : null}
         {checkSubmissionType(data, 'online_upload') ? (
           <ActionIcon
             radius={'md'}
@@ -76,9 +96,7 @@ export default function Assignment({ content_id }: {content_id: string}) {
             variant={'light'}
             onClick={() =>
               setSubmissionType(
-                submissionType == 'online_upload'
-                  ? undefined
-                  : 'online_upload'
+                submissionType == 'online_upload' ? undefined : 'online_upload'
               )
             }
           >
@@ -104,13 +122,12 @@ export default function Assignment({ content_id }: {content_id: string}) {
       <Collapse in={submissionType == 'online_upload'}>
         <FileUpload content_id={content_id} token={token} router={router} />
       </Collapse>
+      <Collapse in={submissionType == 'online_url'}>
+        <URLSubmission content_id={content_id} token={token} router={router} />
+      </Collapse>
     </div>
   )
-  else {
-    return (
-      <LoadingOverlay visible />
-    )
-  }
+  else return <></>
   function checkSubmissionType(data: {submission_types: string[]}, type: string) {
     let currentReturn = false;
     if (data.submission_types != null) data.submission_types.map((currentType: string) => {

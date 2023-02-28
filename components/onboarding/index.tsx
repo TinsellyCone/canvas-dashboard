@@ -14,6 +14,7 @@ import {
 } from "@mantine/core";
 import Head from "next/head";
 import { useState } from "react";
+// @ts-ignore
 import InputMask from "react-input-mask";
 import AvatarCard from 'components/avatarCard'
 import { IconArrowLeft } from "@tabler/icons-react";
@@ -139,6 +140,7 @@ export default function OnBoarding() {
                 component={InputMask}
                 mask='+1 (999) 999-9999'
                 maskChar='   '
+                // @ts-ignore
                 onChange={(event) => setNumber(event.target.value)}
                 placeholder='+1 (123) 456-7890'
                 value={phone_number}
