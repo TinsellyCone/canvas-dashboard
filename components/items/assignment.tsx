@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import { useRouter } from 'next/router';
 import useToken from 'components/lib/useToken';
-import { LoadingOverlay, Card, Group, Flex, Button, ActionIcon, Collapse } from '@mantine/core';
+import { LoadingOverlay, Card, Group, Flex, Button, ActionIcon, Collapse, Anchor } from '@mantine/core';
 import TextEditor from 'components/submissions/richText'
 import { FileUpload } from 'components/submissions/fileUpload';
 import DataStack from './dataStack';
@@ -71,22 +71,6 @@ export default function Assignment({ content_id }: {content_id: string}) {
             <IconForms size={30} />
           </ActionIcon>
         ) : null}
-        {checkSubmissionType(data, 'online_upload') ? (
-          <ActionIcon
-            radius={'md'}
-            color={'blue'}
-            w={70}
-            h={70}
-            variant={'light'}
-            onClick={() =>
-              setSubmissionType(
-                submissionType == 'online_upload' ? undefined : 'online_upload'
-              )
-            }
-          >
-            <IconUpload size={30} />
-          </ActionIcon>
-        ) : null}
         {checkSubmissionType(data, 'online_url') ? (
           <ActionIcon
             radius={'md'}
@@ -101,6 +85,22 @@ export default function Assignment({ content_id }: {content_id: string}) {
             }
           >
             <IconLink size={30} />
+          </ActionIcon>
+        ) : null}
+        {checkSubmissionType(data, 'online_upload') ? (
+          <ActionIcon
+            radius={'md'}
+            color={'blue'}
+            w={70}
+            h={70}
+            variant={'light'}
+            onClick={() =>
+              setSubmissionType(
+                submissionType == 'online_upload' ? undefined : 'online_upload'
+              )
+            }
+          >
+            <IconUpload size={30} />
           </ActionIcon>
         ) : null}
         <ActionIcon
@@ -127,11 +127,7 @@ export default function Assignment({ content_id }: {content_id: string}) {
       </Collapse>
     </div>
   )
-  else {
-    return (
-      <LoadingOverlay visible />
-    )
-  }
+  else return <></>
   function checkSubmissionType(data: {submission_types: string[]}, type: string) {
     let currentReturn = false;
     if (data.submission_types != null) data.submission_types.map((currentType: string) => {

@@ -8,6 +8,7 @@ import {
   Table,
   MantineNumberSize,
   ActionIcon,
+  Badge,
 } from '@mantine/core'
 import { IconUpload, IconFileUpload, IconX } from '@tabler/icons'
 import { openConfirmModal } from '@mantine/modals'
@@ -111,7 +112,7 @@ export function FileUpload({
           </Dropzone.Idle>
           <div>
             <Text size='xl' inline>
-              Drag files here or click to select
+              Drag files here or click to select <Badge>Work In Progress</Badge>
             </Text>
             <Text size='sm' color='dimmed' inline mt={7}>
               Attach as many files as you like, each file should not exceed 5mb
