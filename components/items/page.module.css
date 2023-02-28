@@ -4,7 +4,7 @@
 
 .page {
   width: 100% !important;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
 }
 
 .page img {

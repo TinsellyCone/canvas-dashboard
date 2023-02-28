@@ -38,7 +38,7 @@ export function FileUpload({
         w={'calc(50% - 6px)'}
         shadow={'sm'}
         h={256}
-        style={{ overflow: 'scroll', transition: 'opacity 0.25s ease-in-out,' }}
+        style={{ overflowY: 'scroll', transition: 'opacity 0.25s ease-in-out,' }}
       >
         <Table>
           <tbody>

@@ -5,21 +5,17 @@ import { openConfirmModal } from '@mantine/modals'
 import { updateNotification, showNotification } from '@mantine/notifications'
 import { IconCheck, IconX } from '@tabler/icons-react'
 import {
-  LoadingOverlay,
   Card,
   Title,
   Text,
   Stack,
   Divider,
   Button,
-  Collapse,
-  TextInput,
   Textarea,
 } from '@mantine/core'
-import style from './page.module.css'
+import style from './discussion.module.css'
 import { CommentHtml } from './comment'
 import { useState } from 'react'
-import { text } from 'node:stream/consumers'
 
 export default function Discussion({ content_id }: { content_id: string }) {
   const [submitting, setSubmitting] = useState(false)
@@ -70,7 +66,7 @@ export default function Discussion({ content_id }: { content_id: string }) {
           <Stack mb={32}>
             <Title order={2}>{data.title}</Title>
           </Stack>
-          <Text dangerouslySetInnerHTML={{ __html: data.message }} />
+          <Text className={style.discussion} dangerouslySetInnerHTML={{ __html: data.message }} />
           <Textarea
             value={textContent}
             onChange={(event) => setTextContent(event.target.value)}
@@ -90,6 +86,7 @@ export default function Discussion({ content_id }: { content_id: string }) {
                   return (
                     <CommentHtml
                       key={index}
+                      className={style.discussion}
                       // @ts-ignore
                       author={users[index + 1]}
                       body={comment.message}
@@ -112,12 +109,6 @@ export default function Discussion({ content_id }: { content_id: string }) {
           )}
         </Card>
       </div>
-      // <div style={{ marginLeft: 24, marginRight: 24, marginBottom: 24 }}>
-      //   <div
-      //     dangerouslySetInnerHTML={{ __html: data.message }}
-      //     className={style.page}
-      //   />
-      // </div>
     )
   } else {
     return <></>
