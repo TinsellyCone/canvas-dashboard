@@ -72,7 +72,7 @@ export default function Module({
                                 item.type != 'ExternalUrl' &&
                                 item.type != 'ExternalTool'
                                   ? item.type != 'Quiz'
-                                    ? courseID +
+                                    ? '/class/' + courseID +
                                       '/module/' +
                                       moduleID +
                                       '/item/' +

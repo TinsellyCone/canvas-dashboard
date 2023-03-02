@@ -40,7 +40,7 @@ export default function Index() {
       <>
         <Titlebar
           title={data.title}
-          backURL={('/class/' + router.query.className) as unknown as URL}
+          backURL={('/class/' + router.query.className + '/module') as unknown as URL}
         />
         <Assignment content_id={data.content_id} />
       </>

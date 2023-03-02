@@ -76,7 +76,7 @@ export default function OnBoarding() {
             style={{ margin: '0 auto', marginTop: 16 }}
           >
             <TextInput
-              placeholder='Token'
+              placeholder='1885~...'
               onChange={(event) => setToken(event.target.value)}
               value={token}
               w={'100%'}
