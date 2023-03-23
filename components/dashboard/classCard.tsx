@@ -31,15 +31,44 @@ export default function ClassCard(props) {
   // imagePath, className, grade, active
   const { token } = useToken()
   const fetcher = (...args) => fetch(...args).then((res) => res.json())
-  const { data, error, isLoading } = useSWR(
+  const {
+    data: assignmentData,
+    error: assignmentError,
+    isLoading: assignmentLoading,
+  } = useSWR(
     '/canvas/courses/' +
       props.id +
       '/assignments?access_token=' +
       token +
       '&per_page=2&order_by=due_at',
     fetcher
+    )
+  const {
+    data: announcementData,
+    error: announcementError,
+    isLoading: announcementLoading,
+  } = useSWR(
+    [
+      '/canvas/anouncements?access_token=' + token,
+      {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify({
+          context_codes: ['course_' + props.id],
+        }),
+      },
+    ],
+    fetcher
   )
-  console.log(data)
+  console.log(announcementData)
 
   const [opened, setOpened] = useState(false)
   return (
@@ -63,15 +92,15 @@ export default function ClassCard(props) {
 
       <Stack spacing={'xs'}>
         <Group position='left' spacing={'xs'}>
-          {isLoading ? (
+          {assignmentLoading ? (
             <Skeleton w={20} h={20} />
           ) : (
             <IconNotebook size={'20'} color={'gray'} />
           )}
           <Text color={'dimmed'} size={'sm'} lineClamp={1} maw={200}>
-            {!isLoading ? (
-              data[0] != null ? (
-                data[0].name
+            {!assignmentLoading ? (
+              assignmentData[0] != null ? (
+                assignmentData[0].name
               ) : null
             ) : (
               <Skeleton visible h={15} w={75} />
@@ -79,15 +108,15 @@ export default function ClassCard(props) {
           </Text>
         </Group>
         <Group position='left' spacing={'xs'}>
-          {isLoading ? (
+          {assignmentLoading ? (
             <Skeleton w={20} h={20} />
           ) : (
             <IconNotebook size={'20'} color={'gray'} />
           )}
           <Text color={'dimmed'} size={'sm'} lineClamp={1} maw={200}>
-            {!isLoading ? (
-              data[1] != null ? (
-                data[1].name
+            {!assignmentLoading ? (
+              assignmentData[1] != null ? (
+                assignmentData[1].name
               ) : null
             ) : (
               <Skeleton visible h={15} w={75} />

@@ -16,6 +16,8 @@ export default function URLSubmission({
   }) {
   const [submitting, setSubmitting] = useState(false)
   const [textContent, setTextContent] = useState('')
+  // const urlCheck = new RegExp('https?:\/\/.+\..+', 'g')
+  const urlCheck = /https?:\/\/.+\...+/
   return (
     <Card withBorder shadow={'sm'}>
       <Flex align={'center'} direction={'column'}>
@@ -24,13 +26,14 @@ export default function URLSubmission({
           value={textContent}
           radius={process.env.NEXT_PUBLIC_INPUT_RADIUS as MantineNumberSize}
           w={550}
-          placeholder={'https://'}
+          placeholder={'https://example.com'}
           label={'URL Submission'}
           description={'Type or paste a URL here'}
         />
         <Button
           onClick={submitURL}
-          disabled={submitting || !(textContent.startsWith('http://') || textContent.startsWith('https://')) }
+          // disabled={submitting || !(textContent.startsWith('http://') || textContent.startsWith('https://')) }
+          disabled={submitting || textContent.match(urlCheck) == undefined}
           radius={process.env.NEXT_PUBLIC_RADIUS as MantineNumberSize}
           mt={24}
           w={550}

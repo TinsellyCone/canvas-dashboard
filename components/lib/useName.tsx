@@ -7,7 +7,7 @@ import { PostgrestError } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
 export default function useName(): {name: string[] | undefined, loading: boolean, error: PostgrestError | undefined} {
-  const [name, setName] = useState(undefined);
+  const [name, setName] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<PostgrestError | undefined>(undefined);
 
@@ -28,7 +28,7 @@ export default function useName(): {name: string[] | undefined, loading: boolean
 
         if (error) setError(error);
         if (data) {
-          setName(data.full_name);
+          setName(data.full_name as string);
           setError(undefined);
         }
         setLoading(false);

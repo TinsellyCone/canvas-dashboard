@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import useToken from 'components/lib/useToken'
 import { LoadingOverlay } from '@mantine/core'
 import style from './page.module.css'
+import { Card } from '@mantine/core'
 
 export default function Page({ page_url }: {page_url: string}) {
   const { token } = useToken()
@@ -21,10 +22,19 @@ export default function Page({ page_url }: {page_url: string}) {
   if (!isLoading) {
     return (
       <div style={{ marginLeft: 24, marginRight: 24, marginBottom: 24 }}>
-        <div
-          dangerouslySetInnerHTML={{ __html: data.body }}
-          className={style.page}
-        />
+        <Card
+          radius={'md'}
+          w={'100%'}
+          p={'xl'}
+          mb={24}
+          shadow={'md'}
+          withBorder
+        >
+          <div
+            dangerouslySetInnerHTML={{ __html: data.body }}
+            className={style.page}
+          />
+        </Card>
       </div>
     )
   } else {

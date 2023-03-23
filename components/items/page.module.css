@@ -3,10 +3,6 @@
   background-color: transparent !important;
 }
 
-.discussion p, .discussion span {
-  font-size: inherit !important;
-}
-
 .page {
   width: 100% !important;
   /* overflow-x: scroll; */
@@ -18,10 +14,11 @@
 
 .page a {
   color: #4dabf7; /* #228be6 */
-  text-decoration: none;
+  text-decoration: none !important;
 }
 .page a:hover {
-  text-decoration: underline;
+  text-decoration: underline !important;
+  text-decoration-color: currentColor !important;
 }
 
 .page iframe {
@@ -29,4 +26,8 @@
   outline: 0 !important;
   width: 100%;
   border-radius: 10px;
+}
+
+.page p:first-of-type {
+  margin-top: 0 !important;
 }

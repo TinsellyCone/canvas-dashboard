@@ -3,13 +3,8 @@
   background-color: transparent !important;
 }
 
-.discussion p, .discussion span {
-  font-size: inherit !important;
-}
-
 .assignment {
   width: 100% !important;
-  /* overflow-x: scroll; */
 }
 
 .assignment img {
@@ -18,10 +13,11 @@
 
 .assignment a {
   color: #4dabf7; /* #228be6 */
-  text-decoration: none;
+  text-decoration: none !important;
 }
 .assignment a:hover {
-  text-decoration: underline;
+  text-decoration: underline !important;
+  text-decoration-color: currentColor;
 }
 
 .assignment iframe {
@@ -29,4 +25,12 @@
   outline: 0 !important;
   width: 100%;
   border-radius: 10px;
+}
+
+.assignment p:first-of-type {
+  margin-top: 0 !important;
+}
+
+.assignment p:last-of-type {
+  margin-bottom: 0 !important;
 }

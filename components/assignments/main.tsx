@@ -1,8 +1,9 @@
 import useSWR from 'swr'
-import { LoadingOverlay } from '@mantine/core'
+import { Group, LoadingOverlay } from '@mantine/core'
 import useToken from 'components/lib/useToken'
 import { Accordion, Text, Anchor, Table } from '@mantine/core'
 import Link from 'next/link'
+import { IconNotebook } from '@tabler/icons-react'
 
 export default function Assignments({
   courseID,
@@ -47,12 +48,20 @@ export default function Assignments({
                           <tr key={item.name}>
                             <td>
                               {item.type != 'SubHeader' ? (
-                                <Anchor
-                                  href={'/class/' + courseID + '/assignment/' + item.id}
-                                  component={Link}
-                                >
-                                  {item.name}
-                                </Anchor>
+                                <Group>
+                                  <IconNotebook size={18} />
+                                  <Anchor
+                                    href={
+                                      '/class/' +
+                                      courseID +
+                                      '/assignment/' +
+                                      item.id
+                                    }
+                                    component={Link}
+                                  >
+                                    {item.name}
+                                  </Anchor>
+                                </Group>
                               ) : (
                                 <Text fw={700} color={'dimmed'}>
                                   {item.name}

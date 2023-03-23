@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import { useRouter } from 'next/router';
 import useToken from 'components/lib/useToken';
-import { LoadingOverlay, Card, Group, Flex, Button, ActionIcon, Collapse, Anchor } from '@mantine/core';
+import { LoadingOverlay, Card, Group, Flex, Button, ActionIcon, Collapse, Anchor, Text } from '@mantine/core';
 import TextEditor from 'components/submissions/richText'
 import { FileUpload } from 'components/submissions/fileUpload';
 import DataStack from './dataStack';
@@ -27,7 +27,7 @@ export default function Assignment({ content_id }: {content_id: string}) {
 
   if (!isLoading) return (
     <div style={{ marginLeft: 24, marginRight: 24, marginBottom: 24 }}>
-      <Card w={'100%'} mb={24} shadow={'md'} withBorder>
+      <Card radius={'md'} w={'100%'} mb={24} shadow={'md'} withBorder>
         <Flex justify={'space-evenly'} align={'center'}>
           <DataStack
             data={
@@ -48,10 +48,13 @@ export default function Assignment({ content_id }: {content_id: string}) {
           />
         </Flex>
       </Card>
-      <div
-        className={style.assignment}
-        dangerouslySetInnerHTML={{ __html: data.description }}
-      />
+      {data.description != "" ? <Card radius={'md'} w={'100%'} p={'xl'} mb={24} shadow={'md'} withBorder>
+        {/* <Text color={'dimmed'} fz={'xs'} m={0}>Description</Text> */}
+        <div
+          className={style.assignment}
+          dangerouslySetInnerHTML={{ __html: data.description }}
+        />
+      </Card> : <></>}
       <Group my={24}>
         {checkSubmissionType(data, 'online_text_entry') ? (
           <ActionIcon

@@ -5,15 +5,16 @@ import {
   Title,
   MantineNumberSize,
   useMantineColorScheme,
+  TitleOrder,
 } from '@mantine/core'
 import { IconDotsVertical, IconCheck } from '@tabler/icons'
 import Head from 'next/head'
 import { IconArrowLeft } from '@tabler/icons-react'
 import Link from 'next/link'
 
-type props = { title: String, options?: JSX.Element, backURL?: URL }
+type props = { title: String, options?: JSX.Element, backURL?: URL, order?: number }
 
-export default function Titlebar({ title, options, backURL }: props) {
+export default function Titlebar({ title, options, backURL, order }: props) {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
 
   // useEffect(() => {
@@ -42,13 +43,13 @@ export default function Titlebar({ title, options, backURL }: props) {
       </Head>
       {backURL != null ? (
         <Link href={backURL} style={{ color: 'unset', textDecoration: 'none' }}>
-          <Title order={2}>
+          <Title order={(order as TitleOrder) || 2}>
             <IconArrowLeft size={24} style={{ marginRight: 8 }} />
             {title}
           </Title>
         </Link>
       ) : (
-        <Title order={2}>{title}</Title>
+        <Title order={(order as TitleOrder) || 2}>{title}</Title>
       )}
       {options != null ? (
         <Menu position='bottom-end' transition='pop-top-right'>

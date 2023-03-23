@@ -46,36 +46,72 @@ export default function Discussion({ content_id }: { content_id: string }) {
       '?access_token=' +
       token,
     fetcher
-    )
+  )
   var users = [{}]
-  if (fullData != undefined && fullData.view != undefined) for (let i = 0; i < fullData.view.length; i++) {
-    for (let ii = 0; ii < fullData.participants.length; ii++) {
-      if (fullData.view[i].user_id == fullData.participants[ii].id) {
-        users = (users.concat([{name: fullData.participants[ii].display_name, image: fullData.participants[ii].avatar_image_url}]))
-      }
-      if (fullData.view[i].user_id == undefined) {
-        users = (users.concat([{ name: 'Deleted', image: '' }]))
-        i++
+  if (fullData != undefined && fullData.view != undefined)
+    for (let i = 0; i < fullData.view.length; i++) {
+      for (let ii = 0; ii < fullData.participants.length; ii++) {
+        if (fullData.view[i].user_id == fullData.participants[ii].id) {
+          users = users.concat([
+            {
+              name: fullData.participants[ii].display_name,
+              image: fullData.participants[ii].avatar_image_url,
+            },
+          ])
+        }
+        if (fullData.view[i].user_id == undefined) {
+          users = users.concat([{ name: 'Deleted', image: '' }])
+          i++
+        }
       }
     }
-  }
   if (!isLoading) {
     return (
-      <div style={{height: '100%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', paddingBottom: '24px'}}>
-        <Card withBorder radius={'md'} shadow={'lg'} p={32} mb={48} maw={750} w={'100%'}>
+      <div
+        style={{
+          height: '100%',
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingBottom: '24px',
+        }}
+      >
+        <Card
+          withBorder
+          radius={'md'}
+          shadow={'lg'}
+          p={32}
+          mb={48}
+          maw={750}
+          w={'100%'}
+        >
           <Stack mb={32}>
             <Title order={2}>{data.title}</Title>
           </Stack>
-          <Text className={style.discussion} dangerouslySetInnerHTML={{ __html: data.message }} />
-          <Textarea
-            value={textContent}
-            onChange={(event) => setTextContent(event.target.value)}
-            placeholder='Type something...'
-            mb={12}
+          <Text
+            className={style.discussion}
+            dangerouslySetInnerHTML={{ __html: data.message }}
           />
-          <Button disabled={submitting || textContent == ''} onClick={submitText} variant='light' fullWidth>
-            Post Reply
-          </Button>
+          {data.permissions.reply ? (
+            <>
+              <Textarea
+                value={textContent}
+                onChange={(event) => setTextContent(event.target.value)}
+                placeholder='Type something...'
+                mb={12}
+                autosize
+              />
+              <Button
+                disabled={submitting || textContent == ''}
+                onClick={submitText}
+                variant='light'
+                fullWidth
+              >
+                Post Reply
+              </Button>
+            </>
+          ) : null}
           {fullData != undefined &&
           fullData.view != undefined &&
           fullData.participants != undefined ? (
@@ -143,7 +179,7 @@ export default function Discussion({ content_id }: { content_id: string }) {
         redirect: 'follow', // manual, *follow, error
         referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
         body: JSON.stringify({
-          message: textContent
+          message: textContent,
         }),
       }
     )

@@ -1,6 +1,6 @@
 import { Stack, ActionIcon, Avatar, useMantineTheme, Menu, MantineNumberSize } from '@mantine/core'
 import { IconLogout, IconSettings, IconUser } from '@tabler/icons'
-import { IconDashboard } from '@tabler/icons-react'
+import { IconDashboard, IconSpeakerphone } from '@tabler/icons-react'
 import { useState } from 'react'
 import Link from 'next/link'
 import SettingsModal from 'components/settings'
@@ -19,45 +19,67 @@ export default function Navbar() {
   return (
     <div style={{ zIndex: 99 }}>
       <Stack
-        p={"sm"}
-        style={{ outline: "1px solid dimmed" }}
+        p={'sm'}
+        style={{ outline: '1px solid dimmed' }}
         top={0}
         left={0}
-        w={"fit-content"}
-        h={"100vh"}
-        pos={"sticky"}
+        w={'fit-content'}
+        h={'100vh'}
+        pos={'sticky'}
         bg={
-          theme.colorScheme === "dark"
+          theme.colorScheme === 'dark'
             ? theme.colors.dark[8]
             : theme.colors.gray[0]
         }
-        justify={"space-between"}
+        justify={'space-between'}
       >
         <Stack>
-          <ActionIcon aria-label='Back to Dashboard' size={"lg"} variant="light" component={Link} href="/" radius={process.env.NEXT_PUBLIC_RADIUS as MantineNumberSize}>
+          <ActionIcon
+            aria-label='Dashboard'
+            size={'lg'}
+            variant='light'
+            component={Link}
+            href='/'
+            radius={process.env.NEXT_PUBLIC_RADIUS as MantineNumberSize}
+          >
             <IconDashboard size={20} />
+          </ActionIcon>
+          <ActionIcon
+            aria-label='Announcements'
+            size={'lg'}
+            variant='light'
+            component={Link}
+            href='/announcement'
+            radius={process.env.NEXT_PUBLIC_RADIUS as MantineNumberSize}
+          >
+            <IconSpeakerphone size={20} />
           </ActionIcon>
         </Stack>
         <Stack>
-          <Menu position="right-end" transition={"pop-top-left"}>
+          <Menu position='right-end' transition={'pop-top-left'}>
             <Menu.Target>
               <Avatar
-                style={{ cursor: "pointer" }}
+                style={{ cursor: 'pointer' }}
                 size={34}
                 src={avatarURL}
-                radius={"xl"}
+                radius={'xl'}
                 color={'blue'}
               >
-                {full_name != undefined ? full_name.split(" ")[0].charAt(0).toUpperCase() +
-                  (full_name.split(" ").length >= 2
-                    ? full_name.split(" ")[full_name.split(" ").length - 1].charAt(0)
-                    : "").toUpperCase() : ''}
+                {full_name != undefined
+                  ? full_name.split(' ')[0].charAt(0).toUpperCase() +
+                    (full_name.split(' ').length >= 2
+                      ? full_name
+                          .split(' ')
+                          [full_name.split(' ').length - 1].charAt(0)
+                      : ''
+                    ).toUpperCase()
+                  : ''}
               </Avatar>
             </Menu.Target>
             <Menu.Dropdown>
               {full_name != undefined ? (
                 <>
-                  <Menu.Label>Hi, {full_name.split(" ")[0]}!</Menu.Label>
+                  <Menu.Label>Hi, {full_name.split(' ')[0]}!</Menu.Label>
                   <Menu.Divider />
                 </>
               ) : null}
@@ -72,9 +94,9 @@ export default function Navbar() {
               {session ? (
                 <Menu.Item
                   onClick={() => {
-                    supabase.auth.signOut();
+                    supabase.auth.signOut()
                   }}
-                  color={"red"}
+                  color={'red'}
                   icon={<IconLogout size={14} />}
                 >
                   Sign Out
@@ -84,10 +106,10 @@ export default function Navbar() {
           </Menu>
         </Stack>
       </Stack>
-        <SettingsModal
-          setSettingsOpen={setSettingsOpen}
-          isSettingsOpen={isSettingsOpen}
-        />
+      <SettingsModal
+        setSettingsOpen={setSettingsOpen}
+        isSettingsOpen={isSettingsOpen}
+      />
     </div>
-  );
+  )
 }

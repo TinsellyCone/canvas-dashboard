@@ -9,9 +9,12 @@ import {
   Title,
   MantineNumberSize,
   PasswordInput,
+  Input,
 } from '@mantine/core'
 import { IconDeviceDesktop, IconLink, IconUser } from '@tabler/icons-react'
 import { useEffect, useState } from 'react'
+import AvatarCard from './avatarCard'
+import useProfile from './lib/useProfile'
 import useToken from './lib/useToken'
 import Option from './settingsoption'
 
@@ -25,14 +28,17 @@ export default function SettingsModal({
   const [activeTab, setActiveTab] = useState('profile')
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
   const { token } = useToken()
-  const [userToken, setUserToken] = useState<string | null>()
+  // const [userToken, setUserToken] = useState<string | null>()
+  const { db, setDB, loading } = useProfile(token)
+  // const {profile, setProfile, loading} = useState<{full_name: string, description: string, avatar_url: string, color: string}>({full_name: "", description: "", avatar_url: "", color: ""})
+
   return (
     <Modal
       overflow={'inside'}
       size={'xl'}
       onClose={() => setSettingsOpen(false)}
       opened={isSettingsOpen}
-      title={'Settings'}
+      // title={'Settings'}
       centered
     >
       <Flex gap={20} pb={30} mih={450}>
@@ -64,9 +70,50 @@ export default function SettingsModal({
             <Title order={2} fw={700} mt={0}>
               Profile Settings
             </Title>
+            <AvatarCard
+              fullWidth
+              name={db && db.full_name ? db.full_name : ''}
+              description={db && db.description ? db.description : ''}
+              avatarURL={db && db.avatar_url ? db.avatar_url : ''}
+              color={'blue'}
+            />
+            <Option
+              title={'Name'}
+              description={'Enter your full name'}
+              option={
+                <Input
+                  w={300}
+                  placeholder='Type something...'
+                  value={db && db.full_name ? db.full_name : ''}
+                  onChange={(event) => {
+                    setDB({
+                      ...db,
+                      full_name: event.target.value
+                    })
+                  }}
+                />
+              }
+            />
+            <Option
+              title={'Description'}
+              description={'Keep it short and sweet'}
+              option={
+                <Input
+                  w={300}
+                  placeholder='Type something...'
+                  value={db && db.description ? db.description : ''}
+                  onChange={(event) => {
+                    setDB({
+                      ...db,
+                      description: event.target.value,
+                    })
+                  }}
+                />
+              }
+            />
             <Option
               title={'Profile Publicity'}
-              description={'Should your profile be shown to other students'}
+              description={'Should your profile be shown to other students?'}
               option={<Switch />}
             />
           </Stack>
@@ -81,8 +128,8 @@ export default function SettingsModal({
               description={'Generated in Canvas user settings'}
               option={
                 <PasswordInput
-                  value={userToken == null ? token as string : userToken}
-                  onChange={(event) => setUserToken(event.target.value)}
+                  value={db && db.token ? db.token : ""}
+                  onChange={(event) => setDB({...db, token: event.target.value})}
                   w={300}
                   placeholder='1885~...'
                 />
